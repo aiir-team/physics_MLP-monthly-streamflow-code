@@ -1,0 +1,2 @@
+model_name,total_time_train,time_epoch,time_predict,time_system,scaled_EV,scaled_MSLE,scaled_R2,scaled_MAE,scaled_MSE,scaled_RMSE,scaled_MAPE,scaled_SMAPE,unscaled_EV,unscaled_MSLE,unscaled_R2,unscaled_MAE,unscaled_MSE,unscaled_RMSE,unscaled_MAPE,unscaled_SMAPE
+"MLNN-1H-sliding_3-net_para_hs_(10, True)-ep_2000-bs_128-lr_0.001-ac_('elu', 'elu')-op_sgd-lo_mse",21.8276,0.0109,0.01894903,21.8765,0.1378,0.069,0.1304,0.3846,0.3829,0.6188,230.4769,120.4374,0.1378,0.6452,0.1304,8.6185,192.3226,13.868,159.669,63.7008

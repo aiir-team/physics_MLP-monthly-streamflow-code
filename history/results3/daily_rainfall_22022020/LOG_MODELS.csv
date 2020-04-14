@@ -1,0 +1,2 @@
+model_name,total_time_train,time_epoch,time_predict,time_system,scaled_EV,scaled_MSLE,scaled_R2,scaled_MAE,scaled_MSE,scaled_RMSE,scaled_MAPE,scaled_SMAPE,unscaled_EV,unscaled_MSLE,unscaled_R2,unscaled_MAE,unscaled_MSE,unscaled_RMSE,unscaled_MAPE,unscaled_SMAPE
+"GA_LSTM-hs_([7], True)-ac_('elu', 'elu')-do_(0.2,)--ep_10-ps_50-pc_0.95-pm_0.025",17.7488,1.7749,0.00997329,17.9451,0.2301,0.0018,0.2299,0.0292,0.0023,0.0481,inf,110.1672,0.2301,1.5645,0.2299,7.9125,170.3659,13.0524,inf,110.1672

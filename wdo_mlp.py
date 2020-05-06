@@ -14,10 +14,8 @@ from utils.IOUtil import _load_dataset__
 from utils.Settings import *
 from utils.Settings import wdo_mlp_final as param_grid
 
-if SPF_RUN_TIMES == 1:
-    all_model_file_name = SPF_LOG_FILENAME
-else:  # If runs with more than 1, like stability test --> name of the models ==> such as: rnn1hl.csv
-    all_model_file_name = str(splitext(basename(realpath(__file__)))[0])
+# name of the models ==> such as: rnn1hl.csv
+all_model_file_name = str(splitext(basename(realpath(__file__)))[0])
 
 
 def train_model(item):
@@ -28,13 +26,12 @@ def train_model(item):
         "scaling": SPF_SCALING,  # minmax or std
         "feature_size": SPF_FEATURE_SIZE,  # same, usually : 1
         "network_type": SPF_2D_NETWORK,  # RNN-based: 3D, others: 2D
-        "n_runs": SPF_RUN_TIMES,  # 1 or others
         "log_filename": all_model_file_name,
         "path_save_result": SPF_PATH_SAVE_BASE + SPF_DATA_FILENAME[loop] + "/",
         "draw": SPF_DRAW,
         "log": SPF_LOG
     }
-    paras_name = "hs_{}-ac_{}--ep_{}-ps_{}-RT_{}-g_{}-alp_{}-c_{}-max_v_{}".format(item["hidden_size"], item["activations"], item["epoch"],
+    paras_name = "run_{}-hs_{}-ac_{}--ep_{}-ps_{}-RT_{}-g_{}-alp_{}-c_{}-max_v_{}".format(N_RUNS, item["hidden_size"], item["activations"], item["epoch"],
                         item["pop_size"], item["RT"], item["g"], item["alp"], item["c"], item["max_v"])
     root_hybrid_paras = {
         "hidden_size": item["hidden_size"], "activations": item["activations"], "domain_range": item["domain_range"], "paras_name": paras_name
@@ -47,7 +44,7 @@ def train_model(item):
     md._running__()
 
 
-for _ in range(SPF_RUN_TIMES):
+for N_RUNS in range(SPF_RUN_TIMES):
     for loop in range(len(SPF_DATA_FILENAME)):
         filename = SPF_LOAD_DATA_FROM + SPF_DATA_FILENAME[loop]
         dataset = _load_dataset__(filename, cols=SPF_DATA_COLS[loop])

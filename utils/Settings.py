@@ -13,8 +13,7 @@ SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_LOG_FILENAME = "LOG_MODELS"
-SPF_PATH_SAVE_BASE = "history/results_final_3/"
+SPF_PATH_SAVE_BASE = "history/results/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -29,8 +28,8 @@ SPF_DATA_WINDOWS = [(1, 2, 3), (1, 49, 50)]  # Using ACF to determine which one 
 epochs = [1000]
 activations = [("elu", "elu")]
 
-hidden_sizes1 = [(15, True), ]  # (num_node, checker), default checker is True
-learning_rates = [0.01]
+hidden_sizes1 = [(20, True), ]  # (num_node, checker), default checker is True
+learning_rates = [0.2]
 optimizers = ['sgd']  ## sgd = SGD, adam = Adam,  adagrad = Adagrad, adadelta = Adadelta, rmsprop = RMSprop, adamax = Adamax, nadam = Nadam
 losses = ["mse"]
 batch_sizes = [64]
@@ -38,6 +37,7 @@ dropouts = [(0.2,)]
 
 hidden_sizes2 = [([7, ], True), ]
 pop_sizes = [50]
+hidden_sizes11 = [(7, True), ]  # (num_node, checker), default checker is True
 domain_ranges = [(-1, 1)]
 
 
@@ -225,7 +225,7 @@ aso_lstm_final = {
 
 #### : GA-MLP
 ga_mlp_final = {
-	"hidden_size": hidden_sizes1,
+	"hidden_size": hidden_sizes11,
 	"activations": activations,
 
 	"epoch": epochs,
@@ -237,7 +237,7 @@ ga_mlp_final = {
 
 #### : DE-MLP
 de_mlp_final = {
-	"hidden_size": hidden_sizes1,
+	"hidden_size": hidden_sizes11,
 	"activations": activations,
 
 	"epoch": epochs,
@@ -249,7 +249,7 @@ de_mlp_final = {
 
 #### : PSO-MLP
 pso_mlp_final = {
-	"hidden_size": hidden_sizes1,
+	"hidden_size": hidden_sizes11,
 	"activations": activations,
 
 	"epoch": epochs,
@@ -263,7 +263,7 @@ pso_mlp_final = {
 
 #### : WOA-MLP
 woa_mlp_final = {
-	"hidden_size": hidden_sizes1,
+	"hidden_size": hidden_sizes11,
 	"activations": activations,
 
 	"epoch": epochs,
@@ -273,7 +273,7 @@ woa_mlp_final = {
 
 #### : WDO-MLP
 wdo_mlp_final = {
-	"hidden_size": hidden_sizes1,
+	"hidden_size": hidden_sizes11,
 	"activations": activations,
 
 	"epoch": epochs,
@@ -288,7 +288,7 @@ wdo_mlp_final = {
 
 #### : MVO-MLP
 mvo_mlp_final = {
-	"hidden_size": hidden_sizes1,
+	"hidden_size": hidden_sizes11,
 	"activations": activations,
 
 	"epoch": epochs,
@@ -299,7 +299,7 @@ mvo_mlp_final = {
 
 #### : EO-MLP
 eo_mlp_final = {
-	"hidden_size": hidden_sizes1,
+	"hidden_size": hidden_sizes11,
 	"activations": activations,
 
 	"epoch": epochs,
@@ -309,7 +309,7 @@ eo_mlp_final = {
 
 #### : NRO-MLP
 nro_mlp_final = {
-	"hidden_size": hidden_sizes1,
+	"hidden_size": hidden_sizes11,
 	"activations": activations,
 
 	"epoch": epochs,
@@ -319,7 +319,7 @@ nro_mlp_final = {
 
 #### : HGSO-MLP
 hgso_mlp_final = {
-	"hidden_size": hidden_sizes1,
+	"hidden_size": hidden_sizes11,
 	"activations": activations,
 
 	"epoch": epochs,
@@ -330,7 +330,7 @@ hgso_mlp_final = {
 
 #### : ASO-MLP
 aso_mlp_final = {
-	"hidden_size": hidden_sizes1,
+	"hidden_size": hidden_sizes11,
 	"activations": activations,
 
 	"epoch": epochs,

@@ -14,10 +14,10 @@ import matplotlib.pyplot as plt
 def _draw_predict_with_error__(data=None, error=None, filename=None, pathsave=None):
     plt.plot(data[0])       # True
     plt.plot(data[1])       # Prediction
-    plt.ylabel('True Value')
-    plt.xlabel('Predicted Value')
-    plt.legend(['Predict y... RMSE= ' + str(error[0]), 'Test y... MAE= ' + str(error[1])], loc='upper right')
-    plt.savefig(pathsave + filename + ".png")
+    plt.ylabel('Value')
+    plt.xlabel('Time Step')
+    plt.legend(['True Value (RMSE= ' + str(error[0]) + ')', 'Predicted Value (MAE= ' + str(error[1]) + ')'], loc='upper right')
+    plt.savefig(pathsave + filename + ".png", bbox_inches='tight')
     plt.close()
     return None
 

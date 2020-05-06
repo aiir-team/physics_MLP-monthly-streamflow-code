@@ -7,10 +7,10 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-from numpy import concatenate, savetxt, array
+from numpy import array
 from csv import DictWriter
 from os import getcwd, path, makedirs
-from pandas import read_csv
+from pandas import read_csv, DataFrame
 
 
 def _save_results_to_csv__(item=None, filename=None, pathsave=None):
@@ -23,17 +23,23 @@ def _save_results_to_csv__(item=None, filename=None, pathsave=None):
 			w.writeheader()
 		w.writerow(item)
 
+
 def _save_prediction_to_csv__(y_true=None, y_pred=None, y_true_scaled=None, y_pred_scaled=None, filename=None, pathsave=None):
 	check_directory = getcwd() + "/" + pathsave
 	if not path.exists(check_directory):
 		makedirs(check_directory)
-	temp = concatenate((y_true, y_pred, y_true_scaled, y_pred_scaled), axis=1)
-	savetxt(pathsave + filename + ".csv", X=temp, delimiter=",")
+	temp = {'y_true': y_true.reshape(-1), 'y_pred': y_pred.reshape(-1), 'y_true_scaled': y_true_scaled.reshape(-1), 'y_pred_scaled': y_pred_scaled.reshape(-1)}
+	df = DataFrame(temp, columns=['y_true', 'y_pred', 'y_true_scaled', 'y_pred_scaled'])
+	df.to_csv(pathsave + filename + ".csv", index=False, header=True)
 	return None
 
+
 def _save_loss_train_to_csv__(error=None, filename=None, pathsave=None):
-	savetxt(pathsave + filename + ".csv", array(error), delimiter=",")
+	temp = {'Epoch': array(range(1, len(error)+1)), 'MSE': array(error).reshape(-1)}
+	df = DataFrame(temp, columns=['Epoch', 'MSE'])
+	df.to_csv(pathsave + filename + ".csv", index=False, header=True)
 	return None
+
 
 def _load_dataset__(path_to_data=None, cols=None):
 	"""

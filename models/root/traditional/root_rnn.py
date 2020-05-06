@@ -57,5 +57,5 @@ class RootRnn(RootBase):
 		y_true_unscaled, y_pred_unscaled, y_true_scaled, y_pred_scaled = self._forecasting__()
 		self.time_predict = round(time() - self.time_predict, 8)
 		self.time_system = round(time() - self.time_system, 4)
-		self._save_results__(y_true_unscaled, y_pred_unscaled, y_true_scaled, y_pred_scaled, self.loss_train, self.n_runs)
+		self._save_results__(y_true_unscaled, y_pred_unscaled, y_true_scaled, y_pred_scaled, self.loss_train)
 

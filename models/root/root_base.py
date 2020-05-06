@@ -26,7 +26,6 @@ class RootBase():
 		self.feature_size = root_base_paras["feature_size"]
 		self.network_type = root_base_paras["network_type"]
 
-		self.n_runs = root_base_paras["n_runs"]
 		self.path_save_result = root_base_paras["path_save_result"]
 		self.log_filename = root_base_paras["log_filename"]
 		self.draw = root_base_paras["draw"]
@@ -44,7 +43,7 @@ class RootBase():
 		self.X_train, self.y_train = self.time_series._univariate_data__(data_new, self.data_window, 0, self.time_series.train_split, self.network_type)
 		self.X_test, self.y_test = self.time_series._univariate_data__(data_new, self.data_window, self.time_series.train_split, None, self.network_type)
 
-	def _save_results__(self, y_true=None, y_pred=None, y_true_scaled=None, y_pred_scaled=None, loss_train=None, n_runs=1):
+	def _save_results__(self, y_true=None, y_pred=None, y_true_scaled=None, y_pred_scaled=None, loss_train=None):
 		measure_scaled = MeasureTimeSeries(y_true_scaled, y_pred_scaled, "raw_values", number_rounding=4)
 		measure_scaled._fit__()
 		measure_unscaled = MeasureTimeSeries(y_true, y_pred, "raw_values", number_rounding=4)
@@ -59,13 +58,12 @@ class RootBase():
 		        'unscaled_MAE': measure_unscaled.score_mae, 'unscaled_MSE': measure_unscaled.score_mse, 'unscaled_RMSE': measure_unscaled.score_rmse,
 		        'unscaled_MAPE': measure_unscaled.score_mape, 'unscaled_SMAPE': measure_unscaled.score_smape}
 
-		if n_runs == 1:
-			_save_prediction_to_csv__(y_true, y_pred, y_true_scaled, y_pred_scaled, self.filename, self.path_save_result)
-			_save_loss_train_to_csv__(loss_train, self.filename, self.path_save_result + "Error-")
-			if self.draw:
-				_draw_predict_with_error__([y_true, y_pred], [measure_unscaled.score_rmse, measure_unscaled.score_mae], self.filename, self.path_save_result)
-			if self.log:
-				print('Predict DONE - RMSE: %f, MAE: %f' % (measure_unscaled.score_rmse, measure_unscaled.score_mae))
+		_save_prediction_to_csv__(y_true, y_pred, y_true_scaled, y_pred_scaled, self.filename, self.path_save_result)
+		_save_loss_train_to_csv__(loss_train, self.filename, self.path_save_result + "Error-")
+		if self.draw:
+			_draw_predict_with_error__([y_true, y_pred], [measure_unscaled.score_rmse, measure_unscaled.score_mae], self.filename, self.path_save_result)
+		if self.log:
+			print('Predict DONE - RMSE: %f, MAE: %f' % (measure_unscaled.score_rmse, measure_unscaled.score_mae))
 		_save_results_to_csv__(item, self.log_filename, self.path_save_result)
 
 

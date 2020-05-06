@@ -5,14 +5,14 @@
 #       Email:      nguyenthieu2102@gmail.com                                                           %
 #       Homepage:   https://www.researchgate.net/profile/Thieu_Nguyen6                                  %
 #       Github:     https://github.com/thieunguyen5991                                                  %
-# -------------------------------------------------------------------------------------------------------%
+#-------------------------------------------------------------------------------------------------------%
 
 from os.path import splitext, basename, realpath
 from sklearn.model_selection import ParameterGrid
-from models.main.hybrid_lstm import DeLstm
+from models.main.hybrid_lstm import PsoLstm
 from utils.IOUtil import _load_dataset__
 from utils.Settings import *
-from utils.Settings import de_lstm_final as param_grid
+from utils.Settings import pso_lstm_final as param_grid
 
 if SPF_RUN_TIMES == 1:
     all_model_file_name = SPF_LOG_FILENAME
@@ -28,27 +28,24 @@ def train_model(item):
         "scaling": SPF_SCALING,  # minmax or std
         "feature_size": SPF_FEATURE_SIZE,  # same, usually : 1
         "network_type": SPF_3D_NETWORK,  # RNN-based: 3D, others: 2D
-        "n_runs": SPF_RUN_TIMES,  # 1 or others
         "log_filename": all_model_file_name,
         "path_save_result": SPF_PATH_SAVE_BASE + SPF_DATA_FILENAME[loop] + "/",
         "draw": SPF_DRAW,
         "log": SPF_LOG
     }
-    paras_name = "hs_{}-ac_{}-do_{}--ep_{}-ps_{}-wf_{}-cr_{}".format(item["hidden_sizes"], item["activations"], item["dropouts"],
-                                                                     item["epoch"], item["pop_size"], item["wf"], item["cr"])
+    paras_name = "hs_{}-ac_{}-do_{}--ep_{}-ps_{}-c1_{}-c2_{}-w_min_{}-w_max_{}".format(item["hidden_sizes"], item["activations"], item["dropouts"],
+                            item["epoch"], item["pop_size"], item["c1"], item["c2"], item["w_min"], item["w_max"])
     root_hybrid_paras = {
         "hidden_sizes": item["hidden_sizes"], "activations": item["activations"], "dropouts": item["dropouts"],
         "domain_range": item["domain_range"], "paras_name": paras_name
     }
-    de_paras = {
-        "epoch": item["epoch"], "pop_size": item["pop_size"], "wf": item["wf"], "cr": item["cr"]
-    }
+    pso_paras = {"epoch": item["epoch"], "pop_size": item["pop_size"], "c1": item["c1"], "c2": item["c2"], "w_min": item["w_min"], "w_max": item["w_max"]}
 
-    md = DeLstm(root_base_paras=root_base_paras, root_hybrid_paras=root_hybrid_paras, de_paras=de_paras)
+    md = PsoLstm(root_base_paras=root_base_paras, root_hybrid_paras=root_hybrid_paras, pso_paras=pso_paras)
     md._running__()
 
 
-for _ in range(SPF_RUN_TIMES):
+for N_RUNS in range(SPF_RUN_TIMES):
     for loop in range(len(SPF_DATA_FILENAME)):
         filename = SPF_LOAD_DATA_FROM + SPF_DATA_FILENAME[loop]
         dataset = _load_dataset__(filename, cols=SPF_DATA_COLS[loop])

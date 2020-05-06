@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------------------------------%
-# Created by "Thieu Nguyen" at 15:44, 30/03/2020                                                        %
+# Created by "Thieu Nguyen" at 19:16, 26/03/2020                                                        %
 #                                                                                                       %
 #       Email:      nguyenthieu2102@gmail.com                                                           %
 #       Homepage:   https://www.researchgate.net/profile/Thieu_Nguyen6                                  %
 #       Github:     https://github.com/thieunguyen5991                                                  %
-#-------------------------------------------------------------------------------------------------------%
+# -------------------------------------------------------------------------------------------------------%
 
 from os.path import splitext, basename, realpath
 from sklearn.model_selection import ParameterGrid
-from models.main.hybrid_lstm import NroLstm
+from models.main.hybrid_lstm import EoLstm
 from utils.IOUtil import _load_dataset__
 from utils.Settings import *
-from utils.Settings import nro_lstm_final as param_grid
+from utils.Settings import eo_lstm_final as param_grid
 
 if SPF_RUN_TIMES == 1:
     all_model_file_name = SPF_LOG_FILENAME
@@ -28,7 +28,6 @@ def train_model(item):
         "scaling": SPF_SCALING,  # minmax or std
         "feature_size": SPF_FEATURE_SIZE,  # same, usually : 1
         "network_type": SPF_3D_NETWORK,  # RNN-based: 3D, others: 2D
-        "n_runs": SPF_RUN_TIMES,  # 1 or others
         "log_filename": all_model_file_name,
         "path_save_result": SPF_PATH_SAVE_BASE + SPF_DATA_FILENAME[loop] + "/",
         "draw": SPF_DRAW,
@@ -39,13 +38,13 @@ def train_model(item):
         "hidden_sizes": item["hidden_sizes"], "activations": item["activations"], "dropouts": item["dropouts"],
         "domain_range": item["domain_range"], "paras_name": paras_name
     }
-    nro_paras = {"epoch": item["epoch"], "pop_size": item["pop_size"]}
+    eo_paras = {"epoch": item["epoch"], "pop_size": item["pop_size"]}
 
-    md = NroLstm(root_base_paras=root_base_paras, root_hybrid_paras=root_hybrid_paras, nro_paras=nro_paras)
+    md = EoLstm(root_base_paras=root_base_paras, root_hybrid_paras=root_hybrid_paras, eo_paras=eo_paras)
     md._running__()
 
 
-for _ in range(SPF_RUN_TIMES):
+for N_RUNS in range(SPF_RUN_TIMES):
     for loop in range(len(SPF_DATA_FILENAME)):
         filename = SPF_LOAD_DATA_FROM + SPF_DATA_FILENAME[loop]
         dataset = _load_dataset__(filename, cols=SPF_DATA_COLS[loop])

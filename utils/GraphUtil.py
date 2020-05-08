@@ -7,8 +7,12 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 # -------------------------------------------------------------------------------------------------------%
 
+import matplotlib
+# Force matplotlib to not use any Xwindows backend.
+matplotlib.use('Agg')
+
 from numpy import array, arange
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 
 
 def _draw_predict_with_error__(data=None, error=None, filename=None, pathsave=None):

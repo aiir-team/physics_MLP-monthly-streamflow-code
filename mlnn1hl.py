@@ -17,7 +17,10 @@ import time
 import os
 import tensorflow as tf
 
-os.system("taskset -p 0xff %d" % os.getpid())
+#os.system("taskset -p 0xff %d" % os.getpid())
+
+os.sched_setaffinity(0, {1})
+
 # os.environ['MKL_NUM_THREADS'] = '1'
 # os.environ['GOTO_NUM_THREADS'] = '1'
 # os.environ['OMP_NUM_THREADS'] = '1'

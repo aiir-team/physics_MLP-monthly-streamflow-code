@@ -26,8 +26,8 @@ os.sched_setaffinity(0, {1})
 # os.environ['OMP_NUM_THREADS'] = '1'
 # os.environ['openmp'] = 'True'
 
-tf.config.threading.set_intra_op_parallelism_threads(1)  # matrix multiplication and reductions
-tf.config.threading.set_inter_op_parallelism_threads(1)  # number of threads used by independent non-blocking operations
+tf.config.threading.set_intra_op_parallelism_threads(2)  # matrix multiplication and reductions
+tf.config.threading.set_inter_op_parallelism_threads(2)  # number of threads used by independent non-blocking operations
 
 
 # name of the models ==> such as: rnn1hl.csv

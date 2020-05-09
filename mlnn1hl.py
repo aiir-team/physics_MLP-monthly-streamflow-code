@@ -16,9 +16,9 @@ from utils.Settings import mlnn1hl_final as param_grid
 import time
 
 import os
-os.environ['MKL_NUM_THREADS'] = '1'
-os.environ['GOTO_NUM_THREADS'] = '1'
-os.environ['OMP_NUM_THREADS'] = '1'
+os.environ['MKL_NUM_THREADS'] = '2'
+os.environ['GOTO_NUM_THREADS'] = '2'
+os.environ['OMP_NUM_THREADS'] = '2'
 os.environ['openmp'] = 'True'
 
 
@@ -62,8 +62,13 @@ print("Taken: {} seconds".format(end_time))
 
 ## Chua set os thi chay tren : 3 cores
 ## Set os 2 thi chay tren: 5 cores - 10.4 seconds
-## Set os 1 thi chay tren:
-## Set os 2 va tensorflow thi chay tren:
+	## I tensorflow/core/common_runtime/process_util.cc:147] Creating new thread pool with default inter op setting: 4. Tune using inter_op_parallelism_threads for best performance.
+
+## Set os 1 thi chay tren:  9 cores - 11.3 seconds
+	## Creating new thread pool with default inter op setting: 8. Tune using inter_op_parallelism_threads for best performance.
+
+## Set os 2 va tensorflow 2 thi chay tren:
+
 ## Set os 1 va tensorflow thi chay tren:
 
 

@@ -16,9 +16,9 @@ from utils.Settings import mlnn1hl_final as param_grid
 import time
 
 import os
-os.environ['MKL_NUM_THREADS'] = '2'
-os.environ['GOTO_NUM_THREADS'] = '2'
-os.environ['OMP_NUM_THREADS'] = '2'
+os.environ['MKL_NUM_THREADS'] = '1'
+os.environ['GOTO_NUM_THREADS'] = '1'
+os.environ['OMP_NUM_THREADS'] = '1'
 os.environ['openmp'] = 'True'
 
 
@@ -59,4 +59,12 @@ for N_RUNS in range(SPF_RUN_TIMES):
 			train_model(item)
 end_time = time.time() - start_time
 print("Taken: {} seconds".format(end_time))
+
+## Chua set os thi chay tren : 3 cores
+## Set os 2 thi chay tren: 5 cores - 10.4 seconds
+## Set os 1 thi chay tren:
+## Set os 2 va tensorflow thi chay tren:
+## Set os 1 va tensorflow thi chay tren:
+
+
 

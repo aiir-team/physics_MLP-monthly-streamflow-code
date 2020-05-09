@@ -12,8 +12,8 @@ from keras.models import Sequential
 from keras.layers import Dense
 from models.root.traditional.root_mlp import RootMlp
 
-tf.config.threading.set_intra_op_parallelism_threads(2)         # matrix multiplication and reductions
-tf.config.threading.set_inter_op_parallelism_threads(2)         # number of threads used by independent non-blocking operations
+tf.config.threading.set_intra_op_parallelism_threads(1)         # matrix multiplication and reductions
+tf.config.threading.set_inter_op_parallelism_threads(1)         # number of threads used by independent non-blocking operations
 
 
 class Mlnn1HL(RootMlp):

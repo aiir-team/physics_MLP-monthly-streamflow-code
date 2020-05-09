@@ -8,8 +8,8 @@
 #-------------------------------------------------------------------------------------------------------%
 
 import tensorflow as tf
-from keras.models import Sequential
-from keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 from models.root.traditional.root_mlp import RootMlp
 
 tf.config.threading.set_intra_op_parallelism_threads(1)         # matrix multiplication and reductions

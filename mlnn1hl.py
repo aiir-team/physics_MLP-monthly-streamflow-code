@@ -15,7 +15,7 @@ from utils.Settings import *
 from utils.Settings import mlnn1hl_final as param_grid
 import time
 
-# import os
+import os
 # os.environ['MKL_NUM_THREADS'] = '1'
 # os.environ['GOTO_NUM_THREADS'] = '1'
 # os.environ['OMP_NUM_THREADS'] = '1'

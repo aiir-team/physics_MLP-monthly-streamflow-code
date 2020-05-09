@@ -19,7 +19,7 @@ import os
 os.environ['MKL_NUM_THREADS'] = '1'
 os.environ['GOTO_NUM_THREADS'] = '1'
 os.environ['OMP_NUM_THREADS'] = '1'
-os.environ['openmp'] = 'True'
+# os.environ['openmp'] = 'True'
 
 
 # name of the models ==> such as: rnn1hl.csv

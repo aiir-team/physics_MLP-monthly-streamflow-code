@@ -14,12 +14,17 @@ from utils.IOUtil import _load_dataset__
 from utils.Settings import *
 from utils.Settings import mlnn1hl_final as param_grid
 import time
-
 import os
+import tensorflow as tf
+
+os.system("taskset -p 0xff %d" % os.getpid())
 # os.environ['MKL_NUM_THREADS'] = '1'
 # os.environ['GOTO_NUM_THREADS'] = '1'
 # os.environ['OMP_NUM_THREADS'] = '1'
 # os.environ['openmp'] = 'True'
+
+tf.config.threading.set_intra_op_parallelism_threads(1)  # matrix multiplication and reductions
+tf.config.threading.set_inter_op_parallelism_threads(1)  # number of threads used by independent non-blocking operations
 
 
 # name of the models ==> such as: rnn1hl.csv

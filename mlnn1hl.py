@@ -13,6 +13,14 @@ from models.main.traditional_mlp import Mlnn1HL
 from utils.IOUtil import _load_dataset__
 from utils.Settings import *
 from utils.Settings import mlnn1hl_final as param_grid
+import time
+
+import os
+os.environ['MKL_NUM_THREADS'] = '2'
+os.environ['GOTO_NUM_THREADS'] = '2'
+os.environ['OMP_NUM_THREADS'] = '2'
+os.environ['openmp'] = 'True'
+
 
 # name of the models ==> such as: rnn1hl.csv
 all_model_file_name = str(splitext(basename(realpath(__file__)))[0])
@@ -39,7 +47,7 @@ def train_model(item):
 	md = Mlnn1HL(root_base_paras=root_base_paras, root_mlp_paras=root_mlp_paras)
 	md._running__()
 
-
+start_time = time.time()
 for N_RUNS in range(SPF_RUN_TIMES):
 	for loop in range(len(SPF_DATA_FILENAME)):
 		filename = SPF_LOAD_DATA_FROM + SPF_DATA_FILENAME[loop]
@@ -49,3 +57,6 @@ for N_RUNS in range(SPF_RUN_TIMES):
 		# Create combination of params.
 		for item in list(ParameterGrid(param_grid)):
 			train_model(item)
+end_time = time.time() - start_time
+print("Taken: {} seconds".format(end_time))
+

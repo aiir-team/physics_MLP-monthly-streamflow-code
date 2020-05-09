@@ -25,7 +25,7 @@ SPF_DATA_WINDOWS = [(1, 2, 3), (1, 49, 50)]  # Using ACF to determine which one 
 
 
 ###### Setting for paper running on server ==============================
-epochs = [30]
+epochs = [100]
 activations = [("elu", "elu")]
 
 hidden_sizes1 = [(20, True), ]  # (num_node, checker), default checker is True

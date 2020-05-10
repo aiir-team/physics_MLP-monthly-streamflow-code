@@ -64,10 +64,10 @@ if __name__ == '__main__':
     processes = []
     for idx_md, my_md in enumerate(models):
         p = multiprocessing.Process(target=multiprocessing_func, args=(my_md,))
-        # Pin created processes in a round-robin
-        os.system("taskset -p -c %d %d" % ((idx_md % os.cpu_count()), p.pid))       # 0%8 = 0 --> core_id: 0, pid: rnn
-        processes.append(p)                                                         # 1%8 = 1 --> core_id: 1, pid: lstm
+        processes.append(p)
         p.start()
+        # Pin created processes in a round-robin                                # 0%8 = 0 --> core_id: 0, pid: rnn
+        os.system("taskset -p -c %d %d" % ((idx_md % os.cpu_count()), p.pid))   # 1 % 8 = 1 --> core_id: 1, pid: lstm
 
     for process in processes:
         process.join()

@@ -7,7 +7,7 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-SPF_RUN_TIMES = 2
+SPF_RUN_TIMES = 1
 SPF_2D_NETWORK = "2D"
 SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"
@@ -30,7 +30,7 @@ SPF_ACTIVATIONS = [("elu", "elu")]
 
 
 ###### Setting for paper running on server ==============================
-epochs = [10]
+epochs = [100]
 activations = [("elu", "elu")]
 
 hidden_sizes1 = [(20, True), ]  # (num_node, checker), default checker is True
@@ -230,77 +230,117 @@ aso_lstm_final = {
 
 #### : GA-MLP
 ga_mlp_final = {
+	"hidden_size": hidden_sizes11,
+	"activations": activations,
+
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"pc": [0.95],  # 0.85 -> 0.97
-	"pm": [0.025]  # 0.005 -> 0.10
+	"pm": [0.025],  # 0.005 -> 0.10
+	"domain_range": domain_ranges
 }
 
 #### : DE-MLP
 de_mlp_final = {
+	"hidden_size": hidden_sizes11,
+	"activations": activations,
+
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"wf": [0.8],
-	"cr": [0.9]
+	"cr": [0.9],
+	"domain_range": domain_ranges
 }
 
 #### : PSO-MLP
 pso_mlp_final = {
+	"hidden_size": hidden_sizes11,
+	"activations": activations,
+
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"c1": [1.2],
 	"c2": [1.2],
 	"w_min": [0.4],
-	"w_max": [0.9]
+	"w_max": [0.9],
+	"domain_range": domain_ranges
 }
 
 #### : WOA-MLP
 woa_mlp_final = {
+	"hidden_size": hidden_sizes11,
+	"activations": activations,
+
 	"epoch": epochs,
-	"pop_size": pop_sizes
+	"pop_size": pop_sizes,
+	"domain_range": domain_ranges
 }
 
 #### : WDO-MLP
 wdo_mlp_final = {
+	"hidden_size": hidden_sizes11,
+	"activations": activations,
+
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"RT": [3],
 	"g": [0.2],
 	"alp": [0.4],
 	"c": [0.4],
-	"max_v": [0.3]
+	"max_v": [0.3],
+	"domain_range": domain_ranges
 }
 
 #### : MVO-MLP
 mvo_mlp_final = {
+	"hidden_size": hidden_sizes11,
+	"activations": activations,
+
 	"epoch": epochs,
 	"pop_size": pop_sizes,
-	"wep_minmax": [(1.0, 0.2), ]
+	"wep_minmax": [(1.0, 0.2), ],
+	"domain_range": domain_ranges
 }
 
 #### : EO-MLP
 eo_mlp_final = {
+	"hidden_size": hidden_sizes11,
+	"activations": activations,
+
 	"epoch": epochs,
-	"pop_size": pop_sizes
+	"pop_size": pop_sizes,
+	"domain_range": domain_ranges
 }
 
 #### : NRO-MLP
 nro_mlp_final = {
+	"hidden_size": hidden_sizes11,
+	"activations": activations,
+
 	"epoch": epochs,
-	"pop_size": pop_sizes
+	"pop_size": pop_sizes,
+	"domain_range": domain_ranges
 }
 
 #### : HGSO-MLP
 hgso_mlp_final = {
+	"hidden_size": hidden_sizes11,
+	"activations": activations,
+
 	"epoch": epochs,
 	"pop_size": pop_sizes,
-	"n_clusters": [2, ]
+	"n_clusters": [2, ],
+	"domain_range": domain_ranges
 }
 
 #### : ASO-MLP
 aso_mlp_final = {
+	"hidden_size": hidden_sizes11,
+	"activations": activations,
+
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"alpha": [50],
-	"beta": [0.2]
+	"beta": [0.2],
+	"domain_range": domain_ranges
 }

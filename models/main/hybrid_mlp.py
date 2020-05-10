@@ -20,7 +20,7 @@ class GaMlp(RootHybridMlp):
         self.pop_size = ga_paras["pop_size"]
         self.pc = ga_paras["pc"]
         self.pm = ga_paras["pm"]
-        self.filename = "GA_MLP-" + root_hybrid_paras["paras_name"]
+        self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
         ga = GA.BaseGA(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size, self.pc, self.pm)
@@ -34,7 +34,7 @@ class DeMlp(RootHybridMlp):
         self.pop_size = de_paras["pop_size"]
         self.wf = de_paras["wf"]
         self.cr = de_paras["cr"]
-        self.filename = "DE_MLP-" + root_hybrid_paras["paras_name"]
+        self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
         de = DE.BaseDE(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size, self.wf, self.cr)
@@ -50,7 +50,7 @@ class PsoMlp(RootHybridMlp):
         self.c2 = pso_paras["c2"]
         self.w_min = pso_paras["w_min"]
         self.w_max = pso_paras["w_max"]
-        self.filename = "PSO_MLP-" + root_hybrid_paras["paras_name"]
+        self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
         md = PSO.BasePSO(self._objective_function__, self.problem_size, self.domain_range, self.log,
@@ -63,7 +63,7 @@ class WoaMlp(RootHybridMlp):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
         self.epoch = woa_paras["epoch"]
         self.pop_size = woa_paras["pop_size"]
-        self.filename = "WOA_MLP-" + root_hybrid_paras["paras_name"]
+        self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
         md = WOA.BaseWOA(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size)
@@ -80,7 +80,7 @@ class WdoMlp(RootHybridMlp):
         self.alp = wdo_paras["alp"]
         self.c = wdo_paras["c"]
         self.max_v = wdo_paras["max_v"]
-        self.filename = "WDO_MLP-" + root_hybrid_paras["paras_name"]
+        self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
         md = WDO.BaseWDO(self._objective_function__, self.problem_size, self.domain_range, self.log,
@@ -94,7 +94,7 @@ class MvoMlp(RootHybridMlp):
         self.epoch = mvo_paras["epoch"]
         self.pop_size = mvo_paras["pop_size"]
         self.wep_minmax = mvo_paras["wep_minmax"]
-        self.filename = "WVO_MLP-" + root_hybrid_paras["paras_name"]
+        self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
         md = MVO.BaseMVO(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size, self.wep_minmax)
@@ -106,7 +106,7 @@ class EoMlp(RootHybridMlp):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
         self.epoch = eo_paras["epoch"]
         self.pop_size = eo_paras["pop_size"]
-        self.filename = "EO_MLP-" + root_hybrid_paras["paras_name"]
+        self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
         md = EO.LevyEO(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size)
@@ -118,7 +118,7 @@ class NroMlp(RootHybridMlp):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
         self.epoch = nro_paras["epoch"]
         self.pop_size = nro_paras["pop_size"]
-        self.filename = "NRO_MLP-" + root_hybrid_paras["paras_name"]
+        self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
         md = NRO.BaseNRO(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size)
@@ -131,7 +131,7 @@ class HgsoMlp(RootHybridMlp):
         self.epoch = hgso_paras["epoch"]
         self.pop_size = hgso_paras["pop_size"]
         self.n_clusters = hgso_paras["n_clusters"]
-        self.filename = "HGSO_MLP-" + root_hybrid_paras["paras_name"]
+        self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
         md = HGSO.LevyHGSO(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size, self.n_clusters)
@@ -145,7 +145,7 @@ class AsoMlp(RootHybridMlp):
         self.pop_size = aso_paras["pop_size"]
         self.alpha = aso_paras["alpha"]
         self.beta = aso_paras["beta"]
-        self.filename = "ASO_MLP-" + root_hybrid_paras["paras_name"]
+        self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
         md = ASO.BaseASO(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size, self.alpha, self.beta)

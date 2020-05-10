@@ -13,6 +13,7 @@ from utils.IOUtil import _load_dataset__
 from utils import Settings
 from utils.Settings import *
 import multiprocessing
+import tensorflow as tf
 from time import time
 
 def setting_and_running(my_model):

@@ -31,9 +31,8 @@ SPF_ACTIVATIONS = [("elu", "elu")]
 
 ###### Setting for paper running on server ==============================
 epochs = [10]
+hidden_sizes_traditional = [(20, True), ]  # (num_node, checker), default checker is True
 activations = [("elu", "elu")]
-
-hidden_sizes1 = [(20, True), ]  # (num_node, checker), default checker is True
 learning_rates = [0.2]
 optimizers = ['sgd']  ## sgd = SGD, adam = Adam,  adagrad = Adagrad, adadelta = Adadelta, rmsprop = RMSprop, adamax = Adamax, nadam = Nadam
 losses = ["mse"]
@@ -51,7 +50,7 @@ domain_ranges = [(-1, 1)]
 
 ####: MLNN-1HL
 mlnn1hl_final = {
-	"hidden_sizes": hidden_sizes1,
+	"hidden_sizes": hidden_sizes_traditional,
 	"activations": activations,
 	"learning_rate": learning_rates,
 	"epoch": epochs,
@@ -62,7 +61,7 @@ mlnn1hl_final = {
 
 ####: RNN-1HL
 rnn1hl_final = {
-	"hidden_sizes": hidden_sizes1,
+	"hidden_sizes": hidden_sizes_traditional,
 	"activations": activations,
 	"learning_rate": learning_rates,
 	"epoch": epochs,
@@ -74,7 +73,7 @@ rnn1hl_final = {
 
 ####: LSTM-1HL
 lstm1hl_final = {
-	"hidden_sizes": hidden_sizes1,
+	"hidden_sizes": hidden_sizes_traditional,
 	"activations": activations,
 	"learning_rate": learning_rates,
 	"epoch": epochs,
@@ -86,7 +85,7 @@ lstm1hl_final = {
 
 ####: GRU-1HL
 gru1hl_final = {
-	"hidden_sizes": hidden_sizes1,
+	"hidden_sizes": hidden_sizes_traditional,
 	"activations": activations,
 	"learning_rate": learning_rates,
 	"epoch": epochs,

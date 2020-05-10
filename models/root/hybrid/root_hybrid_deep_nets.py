@@ -21,18 +21,16 @@ import utils.MathUtil as my_math
 
 class RootHybridDeepNets(RootBase):
     """
-		This is root of all hybrid recurrent neural network (meta-heuristics + RNNs)
+        This is root of all hybrid recurrent neural network (meta-heuristics + RNNs)
 	"""
-
     def __init__(self, root_base_paras=None, root_hybrid_paras=None):
         RootBase.__init__(self, root_base_paras)
         self.domain_range = root_hybrid_paras["domain_range"]
         self.activations = root_hybrid_paras["activations"]
-        self.dropouts = root_hybrid_paras["dropouts"]
         if root_hybrid_paras["hidden_sizes"][-1]:
             self.hidden_sizes = root_hybrid_paras["hidden_sizes"][0]
         else:
-            self.hidden_sizes = 2 * root_base_paras["sliding"] * root_base_paras["feature_size"] + 1
+            self.hidden_sizes = 2 * self.sliding * self.feature_size + 1
         ## New discovery
         self._activation1__ = getattr(my_math, self.activations[0])
         self._activation2__ = getattr(my_math, self.activations[1])
@@ -124,9 +122,9 @@ class RootHybridRnn(RootHybridDeepNets):
         #  The RNN 1-HL architecture
         self.model_rnn = Sequential()
         self.model_rnn.add(LSTM(units=self.hidden_sizes[0], return_sequences=True, activation=self.activations[0], input_shape=(self.X_train.shape[1], 1)))
-        self.model_rnn.add(Dropout(self.dropouts[0]))
+        # self.model_rnn.add(Dropout(self.dropouts[0]))
         self.model_rnn.add(LSTM(units=self.hidden_sizes[0]))
-        self.model_rnn.add(Dropout(0.2))
+        # self.model_rnn.add(Dropout(0.2))
         self.model_rnn.add(Dense(units=1, activation=self.activations[1]))
 
 
@@ -136,7 +134,7 @@ class RootHybridLstm(RootHybridDeepNets):
         #  The LSTM 1-HL architecture
         self.model_rnn = Sequential()
         self.model_rnn.add(LSTM(units=self.hidden_sizes[0], input_shape=(None, 1), activation=self.activations[0]))
-        self.model_rnn.add(Dropout(self.dropouts[0]))
+        # self.model_rnn.add(Dropout(self.dropouts[0]))
         self.model_rnn.add(Dense(units=1, activation=self.activations[1]))
 
 
@@ -146,7 +144,7 @@ class RootHybridGru(RootHybridDeepNets):
         #  The GRU 1-HL architecture
         self.model_rnn = Sequential()
         self.model_rnn.add(GRU(units=self.hidden_sizes[0], input_shape=(self.X_train.shape[1], 1), activation=self.activations[0]))
-        self.model_rnn.add(Dropout(self.dropouts[0]))
+        # self.model_rnn.add(Dropout(self.dropouts[0]))
         self.model_rnn.add(Dense(units=1))
 
 

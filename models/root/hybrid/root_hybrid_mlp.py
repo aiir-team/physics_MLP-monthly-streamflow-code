@@ -26,7 +26,7 @@ class RootHybridMlp(RootBase):
         if root_hybrid_paras["hidden_size"][1]:
             self.hidden_size = root_hybrid_paras["hidden_size"][0]
         else:
-            self.hidden_size = 2 * root_base_paras["sliding"] * root_base_paras["feature_size"] + 1
+            self.hidden_size = 2 * self.sliding * self.feature_size + 1
         self.problem_size, self.epoch = None, None
 
     def _setting__(self):

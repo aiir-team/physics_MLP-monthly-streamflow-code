@@ -38,7 +38,7 @@ class RootRnn(RootBase):
 			self.hidden_sizes = root_rnn_paras["hidden_sizes"][:-1]
 		else:
 			num_hid = len(root_rnn_paras["hidden_sizes"]) - 1
-			self.hidden_sizes = [(num_hid - i) * root_base_paras["sliding"] * root_base_paras["feature_size"] + 1 for i in range(num_hid)]
+			self.hidden_sizes = [(num_hid - i) * self.sliding * self.feature_size + 1 for i in range(num_hid)]
 
 	def _forecasting__(self):
 		y_pred = self.model.predict(self.X_test)

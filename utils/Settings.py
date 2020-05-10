@@ -13,7 +13,7 @@ SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results/"
+SPF_PATH_SAVE_BASE = "history/results2/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -24,25 +24,21 @@ SPF_DATA_COLS = [[1], [1]]
 SPF_DATA_WINDOWS = [(1, 2, 3), (1, 49, 50)]  # Using ACF to determine which one will used
 
 ## Default settings
-SPF_HIDDEN_SIZES_HYBRID = [(7, True), ]  # (num_node, checker), default checker is True
-SPF_DOMAIN_RANGE_HYBRID = (-1, 1)
+SPF_HIDDEN_SIZES_HYBRID = [(7, True), ]             # (num_node, checker), default checker is True
+SPF_DOMAIN_RANGE_HYBRID = (-1, 1)                   # For all hybrid models
 SPF_ACTIVATIONS = [("elu", "elu")]
 
+SPF_HIDDEN_SIZES_HYBRID_RNN = [([7, ], True), ]     # For hybrid LSTM
 
 ###### Setting for paper running on server ==============================
 epochs = [1000]
 hidden_sizes_traditional = [(20, True), ]  # (num_node, checker), default checker is True
-activations = [("elu", "elu")]
 learning_rates = [0.2]
 optimizers = ['sgd']  ## sgd = SGD, adam = Adam,  adagrad = Adagrad, adadelta = Adadelta, rmsprop = RMSprop, adamax = Adamax, nadam = Nadam
 losses = ["mse"]
 batch_sizes = [64]
 dropouts = [(0.2,)]
-
 pop_sizes = [50]
-hidden_sizes2 = [([7, ], True), ]       # For hybrid LSTM
-domain_ranges = [(-1, 1)]
-
 
 ###================= Settings models for paper ============================####
 
@@ -50,7 +46,7 @@ domain_ranges = [(-1, 1)]
 ####: MLNN-1HL
 mlnn1hl_final = {
 	"hidden_sizes": hidden_sizes_traditional,
-	"activations": activations,
+	"activations": SPF_ACTIVATIONS,
 	"learning_rate": learning_rates,
 	"epoch": epochs,
 	"batch_size": batch_sizes,
@@ -61,7 +57,7 @@ mlnn1hl_final = {
 ####: RNN-1HL
 rnn1hl_final = {
 	"hidden_sizes": hidden_sizes_traditional,
-	"activations": activations,
+	"activations": SPF_ACTIVATIONS,
 	"learning_rate": learning_rates,
 	"epoch": epochs,
 	"batch_size": batch_sizes,
@@ -73,7 +69,7 @@ rnn1hl_final = {
 ####: LSTM-1HL
 lstm1hl_final = {
 	"hidden_sizes": hidden_sizes_traditional,
-	"activations": activations,
+	"activations": SPF_ACTIVATIONS,
 	"learning_rate": learning_rates,
 	"epoch": epochs,
 	"batch_size": batch_sizes,
@@ -85,7 +81,7 @@ lstm1hl_final = {
 ####: GRU-1HL
 gru1hl_final = {
 	"hidden_sizes": hidden_sizes_traditional,
-	"activations": activations,
+	"activations": SPF_ACTIVATIONS,
 	"learning_rate": learning_rates,
 	"epoch": epochs,
 	"batch_size": batch_sizes,
@@ -94,26 +90,26 @@ gru1hl_final = {
 	"dropouts": dropouts
 }
 
-#### ============== Hybrid MLP ==============================######
+#### ============== Hybrid MLP/RNN/LSTM/GRU/CNN ==============================######
 
-#### : GA-MLP
-ga_mlp_final = {
+#### : GA-MLP/RNN/LSTM/GRU/CNN
+ga_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"pc": [0.95],  # 0.85 -> 0.97
 	"pm": [0.025]  # 0.005 -> 0.10
 }
 
-#### : DE-MLP
-de_mlp_final = {
+#### : DE-MLP/RNN/LSTM/GRU/CNN
+de_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"wf": [0.8],
 	"cr": [0.9]
 }
 
-#### : PSO-MLP
-pso_mlp_final = {
+#### : PSO-MLP/RNN/LSTM/GRU/CNN
+pso_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"c1": [1.2],
@@ -122,14 +118,14 @@ pso_mlp_final = {
 	"w_max": [0.9]
 }
 
-#### : WOA-MLP
-woa_mlp_final = {
+#### : WOA-MLP/RNN/LSTM/GRU/CNN
+woa_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes
 }
 
-#### : WDO-MLP
-wdo_mlp_final = {
+#### : WDO-MLP/RNN/LSTM/GRU/CNN
+wdo_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"RT": [3],
@@ -139,167 +135,36 @@ wdo_mlp_final = {
 	"max_v": [0.3]
 }
 
-#### : MVO-MLP
-mvo_mlp_final = {
+#### : MVO-MLP/RNN/LSTM/GRU/CNN
+mvo_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"wep_minmax": [(1.0, 0.2), ]
 }
 
-#### : EO-MLP
-eo_mlp_final = {
+#### : EO-MLP/RNN/LSTM/GRU/CNN
+eo_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes
 }
 
-#### : NRO-MLP
-nro_mlp_final = {
+#### : NRO-MLP/RNN/LSTM/GRU/CNN
+nro_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes
 }
 
-#### : HGSO-MLP
-hgso_mlp_final = {
+#### : HGSO-MLP/RNN/LSTM/GRU/CNN
+hgso_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"n_clusters": [2, ]
 }
 
-#### : ASO-MLP
-aso_mlp_final = {
+#### : ASO-MLP/RNN/LSTM/GRU/CNN
+aso_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"alpha": [50],
 	"beta": [0.2]
 }
-
-
-
-#### ============== Hybrid LSTM ==============================######
-#
-# #### : GA-LSTM
-# ga_lstm_final = {
-# 	"hidden_sizes": hidden_sizes2,
-# 	"activations": activations,
-# 	"dropouts": dropouts,
-#
-# 	"epoch": epochs,
-# 	"pop_size": pop_sizes,
-# 	"pc": [0.95],  # 0.85 -> 0.97
-# 	"pm": [0.025],  # 0.005 -> 0.10
-# 	"domain_range": domain_ranges
-# }
-#
-# #### : DE-LSTM
-# de_lstm_final = {
-# 	"hidden_sizes": hidden_sizes2,
-# 	"activations": activations,
-# 	"dropouts": dropouts,
-#
-# 	"epoch": epochs,
-# 	"pop_size": pop_sizes,
-# 	"wf": [0.8],
-# 	"cr": [0.9],
-# 	"domain_range": domain_ranges
-# }
-#
-# #### : PSO-LSTM
-# pso_lstm_final = {
-# 	"hidden_sizes": hidden_sizes2,
-# 	"activations": activations,
-# 	"dropouts": dropouts,
-#
-# 	"epoch": epochs,
-# 	"pop_size": pop_sizes,
-# 	"c1": [2.0],
-# 	"c2": [2.0],
-# 	"w_min": [0.4],
-# 	"w_max": [0.9],
-# 	"domain_range": domain_ranges
-# }
-#
-# #### : WOA-LSTM
-# woa_lstm_final = {
-# 	"hidden_sizes": hidden_sizes2,
-# 	"activations": activations,
-# 	"dropouts": dropouts,
-#
-# 	"epoch": epochs,
-# 	"pop_size": pop_sizes,
-# 	"domain_range": domain_ranges
-# }
-#
-# #### : WDO-LSTM
-# wdo_lstm_final = {
-# 	"hidden_sizes": hidden_sizes2,
-# 	"activations": activations,
-# 	"dropouts": dropouts,
-#
-# 	"epoch": epochs,
-# 	"pop_size": pop_sizes,
-# 	"RT": [3],
-# 	"g": [0.2],
-# 	"alp": [0.4],
-# 	"c": [0.4],
-# 	"max_v": [0.3],
-# 	"domain_range": domain_ranges
-# }
-#
-# #### : MVO-LSTM
-# mvo_lstm_final = {
-# 	"hidden_sizes": hidden_sizes2,
-# 	"activations": activations,
-# 	"dropouts": dropouts,
-#
-# 	"epoch": epochs,
-# 	"pop_size": pop_sizes,
-# 	"wep_minmax": [(1.0, 0.2), ],
-# 	"domain_range": domain_ranges
-# }
-#
-# #### : EO-LSTM
-# eo_lstm_final = {
-# 	"hidden_sizes": hidden_sizes2,
-# 	"activations": activations,
-# 	"dropouts": dropouts,
-#
-# 	"epoch": epochs,
-# 	"pop_size": pop_sizes,
-# 	"domain_range": domain_ranges
-# }
-#
-# #### : NRO-LSTM
-# nro_lstm_final = {
-# 	"hidden_sizes": hidden_sizes2,
-# 	"activations": activations,
-# 	"dropouts": dropouts,
-#
-# 	"epoch": epochs,
-# 	"pop_size": pop_sizes,
-# 	"domain_range": domain_ranges
-# }
-#
-# #### : HGSO-LSTM
-# hgso_lstm_final = {
-# 	"hidden_sizes": hidden_sizes2,
-# 	"activations": activations,
-# 	"dropouts": dropouts,
-#
-# 	"epoch": epochs,
-# 	"pop_size": pop_sizes,
-# 	"n_clusters": [2, ],
-# 	"domain_range": domain_ranges
-# }
-#
-# #### : ASO-LSTM
-# aso_lstm_final = {
-# 	"hidden_sizes": hidden_sizes2,
-# 	"activations": activations,
-# 	"dropouts": dropouts,
-#
-# 	"epoch": epochs,
-# 	"pop_size": pop_sizes,
-# 	"alpha": [50],
-# 	"beta": [0.2],
-# 	"domain_range": domain_ranges
-# }

@@ -15,6 +15,10 @@ from utils.Settings import *
 import multiprocessing
 from time import time
 import os
+os.environ['MKL_NUM_THREADS'] = '1'
+os.environ['GOTO_NUM_THREADS'] = '1'
+os.environ['OMP_NUM_THREADS'] = '1'
+
 import tensorflow as tf
 tf.config.threading.set_intra_op_parallelism_threads(1)  # matrix multiplication and reductions
 tf.config.threading.set_inter_op_parallelism_threads(1)  # number of threads used by independent non-blocking operations

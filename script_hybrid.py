@@ -43,7 +43,7 @@ def setting_and_running(my_model):
                         root_hybrid_paras = {
                             "hidden_size": hidden_size, "activations": activation, "domain_range": SPF_DOMAIN_RANGE_HYBRID, "paras_name": paras_name
                         }
-                        md = getattr(hybrid_mlp, my_model["model"])(root_base_paras, root_hybrid_paras, paras)
+                        md = getattr(hybrid_mlp, my_model["name"])(root_base_paras, root_hybrid_paras, paras)
                         md._running__()
 
 

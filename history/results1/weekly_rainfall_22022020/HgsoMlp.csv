@@ -1,0 +1,3 @@
+model_name,total_time_train,time_epoch,time_predict,time_system,scaled_EV,scaled_MSLE,scaled_R2,scaled_MAE,scaled_MSE,scaled_RMSE,scaled_MAPE,scaled_SMAPE,unscaled_EV,unscaled_MSLE,unscaled_R2,unscaled_MAE,unscaled_MSE,unscaled_RMSE,unscaled_MAPE,unscaled_SMAPE
+HgsoMlp-run_0-hs_7True-ac_eluelu-epoch_10-n_clusters_2-pop_size_50,0.4514,0.0451,0.00022078,0.4757,0.0611,0.0074,-0.5114,0.0837,0.0092,0.0957,inf,95.2521,0.0611,1.415,-0.5114,8.9097,103.7247,10.1845,inf,95.2521
+HgsoMlp-run_1-hs_7True-ac_eluelu-epoch_10-n_clusters_2-pop_size_50,0.378,0.0378,0.00012016,0.3846,0.1958,0.004,0.1309,0.0534,0.0053,0.0726,inf,77.702,0.1958,0.8286,0.1309,5.6823,59.6427,7.7229,inf,77.702

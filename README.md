@@ -28,3 +28,6 @@
 5. HGSO-MLP
 6. ASO-MLP
 
+
+Hybrid MLP: That took: 5483.539757728577 seconds = 92 minutes
+Traditional RNN: That took: 2723.2783584594727 seconds = 46 minutes

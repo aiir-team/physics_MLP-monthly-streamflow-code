@@ -15,7 +15,7 @@ from models.root.traditional.root_mlp import RootMlp
 class Mlnn1HL(RootMlp):
 	def __init__(self, root_base_paras=None, root_mlp_paras=None):
 		RootMlp.__init__(self, root_base_paras, root_mlp_paras)
-		self.filename = "MLNN-1H-" + root_mlp_paras["paras_name"]
+		self.filename = root_mlp_paras["paras_name"]
 
 	def _training__(self):
 		self.model = Sequential()
@@ -29,7 +29,7 @@ class Mlnn1HL(RootMlp):
 class Mlnn2HL(RootMlp):
 	def __init__(self, root_base_paras=None, root_mlp_paras=None):
 		RootMlp.__init__(self, root_base_paras, root_mlp_paras)
-		self.filename = "MLNN-2H-" + root_mlp_paras["paras_name"]
+		self.filename = root_mlp_paras["paras_name"]
 
 	def _training__(self):
 		self.model = Sequential()

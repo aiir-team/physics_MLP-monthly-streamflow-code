@@ -39,8 +39,8 @@ def train_model(item):
 		"draw": SPF_DRAW,
 		"log": SPF_LOG
 	}
-	paras_name = "run_{}-hs_{}-ep_{}-bs_{}-lr_{}-ac_{}-op_{}-lo_{}".format(N_RUNS, item["hidden_sizes"], item["epoch"], item["batch_size"],
-	                                                                       item["learning_rate"], item["activations"], item["optimizer"], item["loss"])
+	paras_name = all_model_file_name.upper() + "-run_{}-hs_{}-ep_{}-bs_{}-lr_{}-ac_{}-op_{}-lo_{}".format(N_RUNS, item["hidden_sizes"], item["epoch"],
+														item["batch_size"], item["learning_rate"], item["activations"], item["optimizer"], item["loss"])
 	root_mlp_paras = {
 		"hidden_sizes": item["hidden_sizes"], "epoch": item["epoch"], "batch_size": item["batch_size"], "learning_rate": item["learning_rate"],
 		"activations": item["activations"], "optimizer": item["optimizer"], "loss": item["loss"], "paras_name": paras_name
@@ -53,7 +53,6 @@ for N_RUNS in range(SPF_RUN_TIMES):
 	for loop in range(len(SPF_DATA_FILENAME)):
 		filename = SPF_LOAD_DATA_FROM + SPF_DATA_FILENAME[loop]
 		dataset = _load_dataset__(filename, cols=SPF_DATA_COLS[loop])
-		feature_size = len(SPF_DATA_COLS[loop])
 		data_window = SPF_DATA_WINDOWS[loop]
 		# Create combination of params.
 		for item in list(ParameterGrid(param_grid)):

@@ -7,13 +7,13 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-SPF_RUN_TIMES = 2
+SPF_RUN_TIMES = 10
 SPF_2D_NETWORK = "2D"
 SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results1/"
+SPF_PATH_SAVE_BASE = "history/results/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -30,7 +30,7 @@ SPF_ACTIVATIONS = [("elu", "elu")]
 
 
 ###### Setting for paper running on server ==============================
-epochs = [10]
+epochs = [1000]
 hidden_sizes_traditional = [(20, True), ]  # (num_node, checker), default checker is True
 activations = [("elu", "elu")]
 learning_rates = [0.2]
@@ -39,9 +39,8 @@ losses = ["mse"]
 batch_sizes = [64]
 dropouts = [(0.2,)]
 
-hidden_sizes2 = [([7, ], True), ]
 pop_sizes = [50]
-hidden_sizes11 = [(7, True), ]  # (num_node, checker), default checker is True
+hidden_sizes2 = [([7, ], True), ]       # For hybrid LSTM
 domain_ranges = [(-1, 1)]
 
 
@@ -93,136 +92,6 @@ gru1hl_final = {
 	"optimizer": optimizers,
 	"loss": losses,
 	"dropouts": dropouts
-}
-
-
-#### ============== Hybrid LSTM ==============================######
-
-#### : GA-LSTM
-ga_lstm_final = {
-	"hidden_sizes": hidden_sizes2,
-	"activations": activations,
-	"dropouts": dropouts,
-
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"pc": [0.95],  # 0.85 -> 0.97
-	"pm": [0.025],  # 0.005 -> 0.10
-	"domain_range": domain_ranges
-}
-
-#### : DE-LSTM
-de_lstm_final = {
-	"hidden_sizes": hidden_sizes2,
-	"activations": activations,
-	"dropouts": dropouts,
-
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"wf": [0.8],
-	"cr": [0.9],
-	"domain_range": domain_ranges
-}
-
-#### : PSO-LSTM
-pso_lstm_final = {
-	"hidden_sizes": hidden_sizes2,
-	"activations": activations,
-	"dropouts": dropouts,
-
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"c1": [2.0],
-	"c2": [2.0],
-	"w_min": [0.4],
-	"w_max": [0.9],
-	"domain_range": domain_ranges
-}
-
-#### : WOA-LSTM
-woa_lstm_final = {
-	"hidden_sizes": hidden_sizes2,
-	"activations": activations,
-	"dropouts": dropouts,
-
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"domain_range": domain_ranges
-}
-
-#### : WDO-LSTM
-wdo_lstm_final = {
-	"hidden_sizes": hidden_sizes2,
-	"activations": activations,
-	"dropouts": dropouts,
-
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"RT": [3],
-	"g": [0.2],
-	"alp": [0.4],
-	"c": [0.4],
-	"max_v": [0.3],
-	"domain_range": domain_ranges
-}
-
-#### : MVO-LSTM
-mvo_lstm_final = {
-	"hidden_sizes": hidden_sizes2,
-	"activations": activations,
-	"dropouts": dropouts,
-
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"wep_minmax": [(1.0, 0.2), ],
-	"domain_range": domain_ranges
-}
-
-#### : EO-LSTM
-eo_lstm_final = {
-	"hidden_sizes": hidden_sizes2,
-	"activations": activations,
-	"dropouts": dropouts,
-
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"domain_range": domain_ranges
-}
-
-#### : NRO-LSTM
-nro_lstm_final = {
-	"hidden_sizes": hidden_sizes2,
-	"activations": activations,
-	"dropouts": dropouts,
-
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"domain_range": domain_ranges
-}
-
-#### : HGSO-LSTM
-hgso_lstm_final = {
-	"hidden_sizes": hidden_sizes2,
-	"activations": activations,
-	"dropouts": dropouts,
-
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"n_clusters": [2, ],
-	"domain_range": domain_ranges
-}
-
-#### : ASO-LSTM
-aso_lstm_final = {
-	"hidden_sizes": hidden_sizes2,
-	"activations": activations,
-	"dropouts": dropouts,
-
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"alpha": [50],
-	"beta": [0.2],
-	"domain_range": domain_ranges
 }
 
 #### ============== Hybrid MLP ==============================######
@@ -303,3 +172,134 @@ aso_mlp_final = {
 	"alpha": [50],
 	"beta": [0.2]
 }
+
+
+
+#### ============== Hybrid LSTM ==============================######
+#
+# #### : GA-LSTM
+# ga_lstm_final = {
+# 	"hidden_sizes": hidden_sizes2,
+# 	"activations": activations,
+# 	"dropouts": dropouts,
+#
+# 	"epoch": epochs,
+# 	"pop_size": pop_sizes,
+# 	"pc": [0.95],  # 0.85 -> 0.97
+# 	"pm": [0.025],  # 0.005 -> 0.10
+# 	"domain_range": domain_ranges
+# }
+#
+# #### : DE-LSTM
+# de_lstm_final = {
+# 	"hidden_sizes": hidden_sizes2,
+# 	"activations": activations,
+# 	"dropouts": dropouts,
+#
+# 	"epoch": epochs,
+# 	"pop_size": pop_sizes,
+# 	"wf": [0.8],
+# 	"cr": [0.9],
+# 	"domain_range": domain_ranges
+# }
+#
+# #### : PSO-LSTM
+# pso_lstm_final = {
+# 	"hidden_sizes": hidden_sizes2,
+# 	"activations": activations,
+# 	"dropouts": dropouts,
+#
+# 	"epoch": epochs,
+# 	"pop_size": pop_sizes,
+# 	"c1": [2.0],
+# 	"c2": [2.0],
+# 	"w_min": [0.4],
+# 	"w_max": [0.9],
+# 	"domain_range": domain_ranges
+# }
+#
+# #### : WOA-LSTM
+# woa_lstm_final = {
+# 	"hidden_sizes": hidden_sizes2,
+# 	"activations": activations,
+# 	"dropouts": dropouts,
+#
+# 	"epoch": epochs,
+# 	"pop_size": pop_sizes,
+# 	"domain_range": domain_ranges
+# }
+#
+# #### : WDO-LSTM
+# wdo_lstm_final = {
+# 	"hidden_sizes": hidden_sizes2,
+# 	"activations": activations,
+# 	"dropouts": dropouts,
+#
+# 	"epoch": epochs,
+# 	"pop_size": pop_sizes,
+# 	"RT": [3],
+# 	"g": [0.2],
+# 	"alp": [0.4],
+# 	"c": [0.4],
+# 	"max_v": [0.3],
+# 	"domain_range": domain_ranges
+# }
+#
+# #### : MVO-LSTM
+# mvo_lstm_final = {
+# 	"hidden_sizes": hidden_sizes2,
+# 	"activations": activations,
+# 	"dropouts": dropouts,
+#
+# 	"epoch": epochs,
+# 	"pop_size": pop_sizes,
+# 	"wep_minmax": [(1.0, 0.2), ],
+# 	"domain_range": domain_ranges
+# }
+#
+# #### : EO-LSTM
+# eo_lstm_final = {
+# 	"hidden_sizes": hidden_sizes2,
+# 	"activations": activations,
+# 	"dropouts": dropouts,
+#
+# 	"epoch": epochs,
+# 	"pop_size": pop_sizes,
+# 	"domain_range": domain_ranges
+# }
+#
+# #### : NRO-LSTM
+# nro_lstm_final = {
+# 	"hidden_sizes": hidden_sizes2,
+# 	"activations": activations,
+# 	"dropouts": dropouts,
+#
+# 	"epoch": epochs,
+# 	"pop_size": pop_sizes,
+# 	"domain_range": domain_ranges
+# }
+#
+# #### : HGSO-LSTM
+# hgso_lstm_final = {
+# 	"hidden_sizes": hidden_sizes2,
+# 	"activations": activations,
+# 	"dropouts": dropouts,
+#
+# 	"epoch": epochs,
+# 	"pop_size": pop_sizes,
+# 	"n_clusters": [2, ],
+# 	"domain_range": domain_ranges
+# }
+#
+# #### : ASO-LSTM
+# aso_lstm_final = {
+# 	"hidden_sizes": hidden_sizes2,
+# 	"activations": activations,
+# 	"dropouts": dropouts,
+#
+# 	"epoch": epochs,
+# 	"pop_size": pop_sizes,
+# 	"alpha": [50],
+# 	"beta": [0.2],
+# 	"domain_range": domain_ranges
+# }

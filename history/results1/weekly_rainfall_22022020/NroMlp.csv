@@ -1,3 +1,0 @@
-model_name,total_time_train,time_epoch,time_predict,time_system,scaled_EV,scaled_MSLE,scaled_R2,scaled_MAE,scaled_MSE,scaled_RMSE,scaled_MAPE,scaled_SMAPE,unscaled_EV,unscaled_MSLE,unscaled_R2,unscaled_MAE,unscaled_MSE,unscaled_RMSE,unscaled_MAPE,unscaled_SMAPE
-NroMlp-run_0-hs_7True-ac_eluelu-epoch_10-pop_size_50,1.5936,0.1594,0.00036621,1.6052,0.1736,0.0045,0.0331,0.0574,0.0059,0.0765,inf,79.0917,0.1736,0.9002,0.0331,6.107,66.3598,8.1462,inf,79.0917
-NroMlp-run_1-hs_7True-ac_eluelu-epoch_10-pop_size_50,2.2134,0.2213,0.0002389,2.224,0.1728,0.0053,-0.1082,0.0674,0.0067,0.0819,inf,86.0458,0.1728,1.1171,-0.1082,7.1729,76.0532,8.7209,inf,86.0458

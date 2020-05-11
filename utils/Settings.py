@@ -96,8 +96,8 @@ gru1hl_final = {
 ga_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
-	"pc": [0.95],  # 0.85 -> 0.97
-	"pm": [0.025]  # 0.005 -> 0.10
+	"pc": [0.9],  # 0.85 -> 0.97
+	"pm": [0.05]  # 0.005 -> 0.10
 }
 
 #### : DE-MLP/RNN/LSTM/GRU/CNN
@@ -112,8 +112,8 @@ de_final = {
 pso_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
-	"c1": [1.2],
-	"c2": [1.2],
+	"c1": [2.0],
+	"c2": [2.0],
 	"w_min": [0.4],
 	"w_max": [0.9]
 }

@@ -31,3 +31,4 @@
 
 Hybrid MLP: That took: 5483.539757728577 seconds = 92 minutes
 Traditional RNN: That took: 2723.2783584594727 seconds = 46 minutes
+MLNN: Taken: 877.7899332046509 seconds = 15 minutes

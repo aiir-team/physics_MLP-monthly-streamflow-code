@@ -9,6 +9,7 @@
 
 from keras.models import Sequential
 from keras.layers import Dense
+from keras import optimizers
 from models.root.traditional.root_mlp import RootMlp
 
 
@@ -21,7 +22,8 @@ class Mlnn1HL(RootMlp):
 		self.model = Sequential()
 		self.model.add(Dense(units=self.hidden_sizes[0], input_dim=self.X_train.shape[1], activation=self.activations[0]))
 		self.model.add(Dense(1, activation=self.activations[1]))
-		self.model.compile(loss=self.loss, optimizer=self.optimizer)
+		self.opt = getattr(optimizers, self.optimizer)(learning_rate=self.learning_rate)
+		self.model.compile(optimizer=self.opt, loss=self.loss)
 		ml = self.model.fit(self.X_train, self.y_train, epochs=self.epoch, batch_size=self.batch_size, verbose=self.log)
 		self.loss_train = ml.history["loss"]
 
@@ -36,7 +38,8 @@ class Mlnn2HL(RootMlp):
 		self.model.add(Dense(self.hidden_sizes[0], input_dim=self.X_train.shape[1], activation=self.activations[0]))
 		self.model.add(Dense(self.hidden_sizes[1], activation=self.activations[1]))
 		self.model.add(Dense(1, activation=self.activations[2]))
-		self.model.compile(loss=self.loss, optimizer=self.optimizer)
+		self.opt = getattr(optimizers, self.optimizer)(learning_rate=self.learning_rate)
+		self.model.compile(optimizer=self.opt, loss=self.loss)
 		ml = self.model.fit(self.X_train, self.y_train, epochs=self.epoch, batch_size=self.batch_size, verbose=self.log)
 		self.loss_train = ml.history["loss"]
 

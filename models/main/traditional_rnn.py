@@ -7,9 +7,10 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-from keras.models import Sequential
 from keras.layers import Dense, LSTM, GRU, Dropout, Flatten
 from keras.layers.convolutional import Conv1D, MaxPooling1D
+from keras.models import Sequential
+from keras import optimizers
 from models.root.traditional.root_rnn import RootRnn
 
 
@@ -24,7 +25,8 @@ class Rnn1HL(RootRnn):
 		self.model.add(LSTM(units=self.hidden_sizes[0], activation=self.activations[0], input_shape=(self.X_train.shape[1], 1)))
 		self.model.add(Dropout(self.dropouts[0]))
 		self.model.add(Dense(units=1, activation=self.activations[1]))
-		self.model.compile(loss=self.loss, optimizer=self.optimizer)
+		self.opt = getattr(optimizers, self.optimizer)(learning_rate=self.learning_rate)
+		self.model.compile(optimizer=self.opt, loss=self.loss)
 		ml = self.model.fit(self.X_train, self.y_train, epochs=self.epoch, batch_size=self.batch_size, verbose=self.log)
 		self.loss_train = ml.history["loss"]
 
@@ -42,7 +44,8 @@ class Rnn2HL(RootRnn):
 		self.model.add(LSTM(units=self.hidden_sizes[1], activation=self.activations[1]))
 		self.model.add(Dropout(self.dropouts[1]))
 		self.model.add(Dense(units=1, activation=self.activations[2]))
-		self.model.compile(loss=self.loss, optimizer=self.optimizer)
+		self.opt = getattr(optimizers, self.optimizer)(learning_rate=self.learning_rate)
+		self.model.compile(optimizer=self.opt, loss=self.loss)
 		ml = self.model.fit(self.X_train, self.y_train, epochs=self.epoch, batch_size=self.batch_size, verbose=self.log)
 		self.loss_train = ml.history["loss"]
 
@@ -57,7 +60,8 @@ class Lstm1HL(RootRnn):
 		self.model = Sequential()
 		self.model.add(LSTM(units=self.hidden_sizes[0], input_shape=(None, 1), activation=self.activations[0]))
 		self.model.add(Dense(units=1, activation=self.activations[1]))
-		self.model.compile(loss=self.loss, optimizer=self.optimizer)
+		self.opt = getattr(optimizers, self.optimizer)(learning_rate=self.learning_rate)
+		self.model.compile(optimizer=self.opt, loss=self.loss)
 		ml = self.model.fit(self.X_train, self.y_train, epochs=self.epoch, batch_size=self.batch_size, verbose=self.log)
 		self.loss_train = ml.history["loss"]
 
@@ -73,7 +77,8 @@ class Lstm2HL(RootRnn):
 		self.model.add(LSTM(units=self.hidden_sizes[0], return_sequences=True, input_shape=(None, 1), activation=self.activations[0]))
 		self.model.add(LSTM(units=self.hidden_sizes[1], activation=self.activations[1]))
 		self.model.add(Dense(units=1, activation=self.activations[2]))
-		self.model.compile(loss=self.loss, optimizer=self.optimizer)
+		self.opt = getattr(optimizers, self.optimizer)(learning_rate=self.learning_rate)
+		self.model.compile(optimizer=self.opt, loss=self.loss)
 		ml = self.model.fit(self.X_train, self.y_train, epochs=self.epoch, batch_size=self.batch_size, verbose=self.log)
 		self.loss_train = ml.history["loss"]
 
@@ -89,7 +94,8 @@ class Gru1HL(RootRnn):
 		self.model.add(GRU(units=self.hidden_sizes[0], input_shape=(self.X_train.shape[1], 1), activation=self.activations[0]))
 		self.model.add(Dropout(self.dropouts[0]))
 		self.model.add(Dense(units=1, activation=self.activations[1]))
-		self.model.compile(loss=self.loss, optimizer=self.optimizer)
+		self.opt = getattr(optimizers, self.optimizer)(learning_rate=self.learning_rate)
+		self.model.compile(optimizer=self.opt, loss=self.loss)
 		ml = self.model.fit(self.X_train, self.y_train, epochs=self.epoch, batch_size=self.batch_size, verbose=self.log)
 		self.loss_train = ml.history["loss"]
 
@@ -107,7 +113,8 @@ class Gru2HL(RootRnn):
 		self.model.add(GRU(units=self.hidden_sizes[1], activation=self.activations[1]))
 		self.model.add(Dropout(self.dropouts[1]))
 		self.model.add(Dense(units=1, activation=self.activations[2]))
-		self.model.compile(loss=self.loss, optimizer=self.optimizer)
+		self.opt = getattr(optimizers, self.optimizer)(learning_rate=self.learning_rate)
+		self.model.compile(optimizer=self.opt, loss=self.loss)
 		ml = self.model.fit(self.X_train, self.y_train, epochs=self.epoch, batch_size=self.batch_size, verbose=self.log)
 		self.loss_train = ml.history["loss"]
 
@@ -128,7 +135,8 @@ class Cnn1(RootRnn):
 		self.model.add(Flatten())
 		self.model.add(Dense(self.hidden_sizes[0], activation=self.activations[1]))
 		self.model.add(Dense(1))
-		self.model.compile(loss=self.loss, optimizer=self.optimizer)
+		self.opt = getattr(optimizers, self.optimizer)(learning_rate=self.learning_rate)
+		self.model.compile(optimizer=self.opt, loss=self.loss)
 		# fit mode
 		ml = self.model.fit(self.X_train, self.y_train, epochs=self.epoch, batch_size=self.batch_size, verbose=self.log)
 		self.loss_train = ml.history["loss"]

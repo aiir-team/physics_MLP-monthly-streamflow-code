@@ -13,7 +13,7 @@ SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results7/"
+SPF_PATH_SAVE_BASE = "history/results8/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -47,10 +47,10 @@ pop_sizes = [50]
 mlnn1hl_final = {
 	"hidden_sizes": hidden_sizes_traditional,
 	"activations": SPF_ACTIVATIONS,
-	"learning_rate": learning_rates,
+	"learning_rate": [0.001],
 	"epoch": epochs,
 	"batch_size": batch_sizes,
-	"optimizer": optimizers,
+	"optimizer": ['SGD'],
 	"loss": losses
 }
 
@@ -97,7 +97,7 @@ ga_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"pc": [0.9],  # 0.85 -> 0.97
-	"pm": [0.05]  # 0.005 -> 0.10
+	"pm": [0.1]  # 0.005 -> 0.10
 }
 
 #### : DE-MLP/RNN/LSTM/GRU/CNN

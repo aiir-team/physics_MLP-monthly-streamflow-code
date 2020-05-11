@@ -54,7 +54,7 @@ def multiprocessing_func(model):
 models = [
     {"name": "GaMlp", "param_grid": getattr(Settings, "ga_final")},
     # {"name": "DeMlp", "param_grid": getattr(Settings, "de_final")},
-    {"name": "PsoMlp", "param_grid": getattr(Settings, "pso_final")},
+    # {"name": "PsoMlp", "param_grid": getattr(Settings, "pso_final")},
     # {"name": "WoaMlp", "param_grid": getattr(Settings, "woa_final")},
     # {"name": "WdoMlp", "param_grid": getattr(Settings, "wdo_final")},
     # {"name": "MvoMlp", "param_grid": getattr(Settings, "mvo_final")},

@@ -13,7 +13,7 @@ SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results6/"
+SPF_PATH_SAVE_BASE = "history/results7/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -33,8 +33,8 @@ SPF_HIDDEN_SIZES_HYBRID_RNN = [([7, ], True), ]     # For hybrid LSTM
 ###### Setting for paper running on server ==============================
 epochs = [1000]
 hidden_sizes_traditional = [(20, True), ]  # (num_node, checker), default checker is True
-learning_rates = [1e-4]
-optimizers = ['Adam']  ## SGD, Adam, Adagrad, Adadelta, RMSprop, Adamax, Nadam
+learning_rates = [0.1]
+optimizers = ['SGD']  ## SGD, Adam, Adagrad, Adadelta, RMSprop, Adamax, Nadam
 losses = ["mse"]
 batch_sizes = [64]
 dropouts = [(0.2,)]

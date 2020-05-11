@@ -13,7 +13,7 @@ SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results8/"
+SPF_PATH_SAVE_BASE = "history/results9/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -92,12 +92,19 @@ gru1hl_final = {
 
 #### ============== Hybrid MLP/RNN/LSTM/GRU/CNN ==============================######
 
+#### : FPA-MLP/RNN/LSTM/GRU/CNN
+fpa_final = {
+	"epoch": epochs,
+	"pop_size": pop_sizes,
+	"p": [0.8]
+}
+
 #### : GA-MLP/RNN/LSTM/GRU/CNN
 ga_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
-	"pc": [0.9],  # 0.85 -> 0.97
-	"pm": [0.1]  # 0.005 -> 0.10
+	"pc": [0.8],  # 0.85 -> 0.97
+	"pm": [0.2]  # 0.005 -> 0.10
 }
 
 #### : DE-MLP/RNN/LSTM/GRU/CNN

@@ -7,6 +7,8 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 # -------------------------------------------------------------------------------------------------------%
 
+import os
+import platform
 from os.path import splitext, basename, realpath
 from sklearn.model_selection import ParameterGrid
 from models.main.traditional_mlp import Mlnn1HL
@@ -19,12 +21,12 @@ import tensorflow as tf
 tf.config.threading.set_intra_op_parallelism_threads(2)  # matrix multiplication and reductions
 tf.config.threading.set_inter_op_parallelism_threads(2)  # number of threads used by independent non-blocking operations
 
-import os
-os.sched_setaffinity(0, {1})
-
+if platform.system() == "Linux":        # Linux: "Linux", Mac: "Darwin", Windows: "Windows"
+	os.sched_setaffinity(0, {1})
 
 # name of the models ==> such as: rnn1hl.csv
 all_model_file_name = str(splitext(basename(realpath(__file__)))[0])
+
 
 def train_model(item):
 	root_base_paras = {

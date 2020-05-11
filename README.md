@@ -17,6 +17,7 @@
 ### Evolutionary 
 1. GA-MLP
 2. DE-MLP
+3. FPA-MLP
 ### Swarm 
 1. PSO-MLP
 2. WOA-MLP
@@ -36,3 +37,6 @@ MLNN: Taken: 877.7899332046509 seconds = 15 minutes
 
 Adam - 0.0001 ---> best
 
+Best:
+    GA: (0.9, 0.1/0.05/0.001) - (0.85, 0.15/0.05/0.001) - 
+    PSO: (2.0, 2.0)

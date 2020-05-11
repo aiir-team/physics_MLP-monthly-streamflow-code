@@ -8,9 +8,22 @@
 #-------------------------------------------------------------------------------------------------------%
 
 from models.root.hybrid.root_hybrid_mlp import RootHybridMlp
-from mealpy.evolutionary_based import GA, DE
+from mealpy.evolutionary_based import GA, DE, FPA
 from mealpy.swarm_based import PSO, WOA
 from mealpy.physics_based import WDO, MVO, EO, NRO, HGSO, ASO
+
+
+class FpaMlp(RootHybridMlp):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, fpa_paras=None):
+        RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
+        self.epoch = fpa_paras["epoch"]
+        self.pop_size = fpa_paras["pop_size"]
+        self.p = fpa_paras["p"]
+        self.filename = root_hybrid_paras["paras_name"]
+
+    def _training__(self):
+        md_temp = FPA.BaseFPA(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size, self.p)
+        self.solution, self.best_fit, self.loss_train = md_temp._train__()
 
 
 class GaMlp(RootHybridMlp):

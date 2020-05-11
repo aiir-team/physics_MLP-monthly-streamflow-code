@@ -53,15 +53,16 @@ def multiprocessing_func(model):
 
 models = [
     {"name": "GaMlp", "param_grid": getattr(Settings, "ga_final")},
-    # {"name": "DeMlp", "param_grid": getattr(Settings, "de_final")},
-    # {"name": "PsoMlp", "param_grid": getattr(Settings, "pso_final")},
-    # {"name": "WoaMlp", "param_grid": getattr(Settings, "woa_final")},
-    # {"name": "WdoMlp", "param_grid": getattr(Settings, "wdo_final")},
-    # {"name": "MvoMlp", "param_grid": getattr(Settings, "mvo_final")},
-    # {"name": "EoMlp", "param_grid": getattr(Settings, "eo_final")},
-    # {"name": "NroMlp", "param_grid": getattr(Settings, "nro_final")},
-    # {"name": "HgsoMlp", "param_grid": getattr(Settings, "hgso_final")},
-    # {"name": "AsoMlp", "param_grid": getattr(Settings, "aso_final")},
+    {"name": "FpaMlp", "param_grid": getattr(Settings, "fpa_final")},
+    {"name": "DeMlp", "param_grid": getattr(Settings, "de_final")},
+    {"name": "PsoMlp", "param_grid": getattr(Settings, "pso_final")},
+    {"name": "WoaMlp", "param_grid": getattr(Settings, "woa_final")},
+    {"name": "WdoMlp", "param_grid": getattr(Settings, "wdo_final")},
+    {"name": "MvoMlp", "param_grid": getattr(Settings, "mvo_final")},
+    {"name": "EoMlp", "param_grid": getattr(Settings, "eo_final")},
+    {"name": "NroMlp", "param_grid": getattr(Settings, "nro_final")},
+    {"name": "HgsoMlp", "param_grid": getattr(Settings, "hgso_final")},
+    {"name": "AsoMlp", "param_grid": getattr(Settings, "aso_final")},
 ]
 
 if __name__ == '__main__':

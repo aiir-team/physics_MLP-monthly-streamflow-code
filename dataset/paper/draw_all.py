@@ -7,14 +7,20 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-from utils.IOUtil import read_dataset_file
 from matplotlib.ticker import FuncFormatter
+import pandas as pd
 import matplotlib.pyplot as plt
+
+
+def read_dataset_file(filepath=None, usecols=None, header=0, index_col=False, inplace=True):
+    df = pd.read_csv(filepath, usecols=usecols, header=header, index_col=index_col)
+    df.dropna(inplace=inplace)
+    return df.values
 
 def plot_all_files(filenames, col_indexs, xlabels, ylabels, titles, colours, pathsaves):
     for i in range(0, len(filenames)):
         filename = filenames[i] + ".csv"
-        pathsave = pathsaves[i] + ".png"
+        pathsave = pathsaves[i] + ".pdf"
         col_index = col_indexs[i]
         color = colours[i]
         xlabel = xlabels[i]
@@ -32,7 +38,10 @@ def plot_all_files(filenames, col_indexs, xlabels, ylabels, titles, colours, pat
         plt.show()
 
 import glob
-filenames = pathsaves = xlabels = ylabels = titles = [f.split(".")[0] for f in glob.glob("*.csv")]
+
+xlabels = ["Timestamp (day)", "Timestamp (week)"]
+ylabels = ["Value", "Value"]
+filenames = pathsaves = titles = [f.split(".")[0] for f in glob.glob("*.csv")]
 col_indexs = [ [1] for _ in range(len(filenames)) ]
 colours = [ '#1f77b4' for _ in range(len(filenames)) ]
 plot_all_files(filenames, col_indexs, xlabels, ylabels, titles, colours, pathsaves)

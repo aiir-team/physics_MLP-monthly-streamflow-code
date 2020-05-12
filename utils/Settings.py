@@ -42,6 +42,24 @@ pop_sizes = [50]
 
 ###================= Settings models for paper ============================####
 
+####: Physics MLP
+physics_mlp_final = {
+	"hidden_sizes": SPF_HIDDEN_SIZES_HYBRID,
+	"activations": SPF_ACTIVATIONS,
+
+	"epoch": epochs,                #### : EO/NRO - MLP/RNN/LSTM/GRU/CNN
+	"pop_size": pop_sizes,
+
+	"RT": [3],                      #### : WDO-MLP/RNN/LSTM/GRU/CNN
+	"g": [0.2],
+	"alp": [0.4],
+	"c": [0.4],
+	"max_v": [0.3],
+
+	"wep_minmax": [(1.0, 0.2), ],   #### : MVO-MLP/RNN/LSTM/GRU/CNN
+
+	"n_clusters": [2, ]             #### : HGSO-MLP/RNN/LSTM/GRU/CNN
+}
 
 ####: MLNN-1HL
 mlnn1hl_final = {
@@ -166,12 +184,4 @@ hgso_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
 	"n_clusters": [2, ]
-}
-
-#### : ASO-MLP/RNN/LSTM/GRU/CNN
-aso_final = {
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"alpha": [50],
-	"beta": [0.2]
 }

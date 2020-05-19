@@ -1,5 +1,7 @@
 drafts/
 
+*.ipynb_*
+
 .idea/
 
 # Byte-compiled / optimized / DLL files

@@ -12,12 +12,12 @@ from mealpy.evolutionary_based import GA
 
 
 class GaCnn(RootHybridCnn):
-	def __init__(self, root_base_paras=None, root_hybrid_paras=None, cnn_paras=None, ga_paras=None):
+	def __init__(self, root_base_paras=None, root_hybrid_paras=None, cnn_paras=None, algo_paras=None):
 		RootHybridCnn.__init__(self, root_base_paras, root_hybrid_paras, cnn_paras)
-		self.epoch = ga_paras["epoch"]
-		self.pop_size = ga_paras["pop_size"]
-		self.pc = ga_paras["pc"]
-		self.pm = ga_paras["pm"]
+		self.epoch = algo_paras["epoch"]
+		self.pop_size = algo_paras["pop_size"]
+		self.pc = algo_paras["pc"]
+		self.pm = algo_paras["pm"]
 		self.filename = "GA_CNN-" + root_hybrid_paras["paras_name"]
 
 	def _training__(self):

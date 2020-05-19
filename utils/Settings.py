@@ -7,13 +7,13 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-SPF_RUN_TIMES = 10
+SPF_RUN_TIMES = 2
 SPF_2D_NETWORK = "2D"
 SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results9/"
+SPF_PATH_SAVE_BASE = "history/results3/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -21,7 +21,7 @@ SPF_LOAD_DATA_FROM = "dataset/paper/"
 
 SPF_DATA_FILENAME = ["daily_rainfall_22022020", "weekly_rainfall_22022020"]
 SPF_DATA_COLS = [[1], [1]]
-SPF_DATA_WINDOWS = [(1, 2, 3), (1, 49, 50)]  # Using ACF to determine which one will used
+SPF_DATA_WINDOWS = [(1, 2, 3), (1, 49, 50, 54)]  # Using ACF to determine which one will used
 
 ## Default settings
 SPF_HIDDEN_SIZES_HYBRID = [(7, True), ]             # (num_node, checker), default checker is True
@@ -31,12 +31,12 @@ SPF_ACTIVATIONS = [("elu", "elu")]
 SPF_HIDDEN_SIZES_HYBRID_RNN = [([7, ], True), ]     # For hybrid LSTM
 
 ###### Setting for paper running on server ==============================
-epochs = [1000]
+epochs = [5]
 hidden_sizes_traditional = [(20, True), ]  # (num_node, checker), default checker is True
 learning_rates = [0.1]
 optimizers = ['SGD']  ## SGD, Adam, Adagrad, Adadelta, RMSprop, Adamax, Nadam
 losses = ["mse"]
-batch_sizes = [64]
+batch_sizes = [32]
 dropouts = [(0.2,)]
 pop_sizes = [50]
 

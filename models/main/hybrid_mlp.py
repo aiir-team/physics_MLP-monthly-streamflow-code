@@ -15,11 +15,11 @@ from time import time
 
 
 class FpaMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, fpa_paras=None):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = fpa_paras["epoch"]
-        self.pop_size = fpa_paras["pop_size"]
-        self.p = fpa_paras["p"]
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
+        self.p = algo_paras["p"]
         self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
@@ -28,12 +28,12 @@ class FpaMlp(RootHybridMlp):
 
 
 class GaMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, ga_paras=None):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = ga_paras["epoch"]
-        self.pop_size = ga_paras["pop_size"]
-        self.pc = ga_paras["pc"]
-        self.pm = ga_paras["pm"]
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
+        self.pc = algo_paras["pc"]
+        self.pm = algo_paras["pm"]
         self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
@@ -42,12 +42,12 @@ class GaMlp(RootHybridMlp):
 
 
 class DeMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, de_paras=None):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = de_paras["epoch"]
-        self.pop_size = de_paras["pop_size"]
-        self.wf = de_paras["wf"]
-        self.cr = de_paras["cr"]
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
+        self.wf = algo_paras["wf"]
+        self.cr = algo_paras["cr"]
         self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
@@ -56,14 +56,14 @@ class DeMlp(RootHybridMlp):
 
 
 class PsoMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, pso_paras=None):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = pso_paras["epoch"]
-        self.pop_size = pso_paras["pop_size"]
-        self.c1 = pso_paras["c1"]
-        self.c2 = pso_paras["c2"]
-        self.w_min = pso_paras["w_min"]
-        self.w_max = pso_paras["w_max"]
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
+        self.c1 = algo_paras["c1"]
+        self.c2 = algo_paras["c2"]
+        self.w_min = algo_paras["w_min"]
+        self.w_max = algo_paras["w_max"]
         self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
@@ -73,10 +73,10 @@ class PsoMlp(RootHybridMlp):
 
 
 class WoaMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, woa_paras=None):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = woa_paras["epoch"]
-        self.pop_size = woa_paras["pop_size"]
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
         self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
@@ -85,15 +85,15 @@ class WoaMlp(RootHybridMlp):
 
 
 class WdoMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, wdo_paras=None):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = wdo_paras["epoch"]
-        self.pop_size = wdo_paras["pop_size"]
-        self.RT = wdo_paras["RT"]
-        self.g = wdo_paras["g"]
-        self.alp = wdo_paras["alp"]
-        self.c = wdo_paras["c"]
-        self.max_v = wdo_paras["max_v"]
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
+        self.RT = algo_paras["RT"]
+        self.g = algo_paras["g"]
+        self.alp = algo_paras["alp"]
+        self.c = algo_paras["c"]
+        self.max_v = algo_paras["max_v"]
         self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
@@ -103,11 +103,11 @@ class WdoMlp(RootHybridMlp):
 
 
 class MvoMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, mvo_paras=None):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = mvo_paras["epoch"]
-        self.pop_size = mvo_paras["pop_size"]
-        self.wep_minmax = mvo_paras["wep_minmax"]
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
+        self.wep_minmax = algo_paras["wep_minmax"]
         self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
@@ -116,10 +116,10 @@ class MvoMlp(RootHybridMlp):
 
 
 class EoMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, eo_paras=None):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = eo_paras["epoch"]
-        self.pop_size = eo_paras["pop_size"]
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
         self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
@@ -128,10 +128,10 @@ class EoMlp(RootHybridMlp):
 
 
 class NroMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, nro_paras=None):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = nro_paras["epoch"]
-        self.pop_size = nro_paras["pop_size"]
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
         self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
@@ -140,11 +140,11 @@ class NroMlp(RootHybridMlp):
 
 
 class HgsoMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, hgso_paras=None):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = hgso_paras["epoch"]
-        self.pop_size = hgso_paras["pop_size"]
-        self.n_clusters = hgso_paras["n_clusters"]
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
+        self.n_clusters = algo_paras["n_clusters"]
         self.filename = root_hybrid_paras["paras_name"]
 
     def _training__(self):
@@ -153,19 +153,19 @@ class HgsoMlp(RootHybridMlp):
 
 
 class PhysicsMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algorithm_paras=None):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
         RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = algorithm_paras["epoch"]
-        self.pop_size = algorithm_paras["pop_size"]
-        self.RT = algorithm_paras["RT"]
-        self.g = algorithm_paras["g"]
-        self.alp = algorithm_paras["alp"]
-        self.c = algorithm_paras["c"]
-        self.max_v = algorithm_paras["max_v"]
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
+        self.RT = algo_paras["RT"]
+        self.g = algo_paras["g"]
+        self.alp = algo_paras["alp"]
+        self.c = algo_paras["c"]
+        self.max_v = algo_paras["max_v"]
 
-        self.wep_minmax = algorithm_paras["wep_minmax"]
+        self.wep_minmax = algo_paras["wep_minmax"]
 
-        self.n_clusters = algorithm_paras["n_clusters"]
+        self.n_clusters = algo_paras["n_clusters"]
 
         self.filename = root_hybrid_paras["paras_name"]
 

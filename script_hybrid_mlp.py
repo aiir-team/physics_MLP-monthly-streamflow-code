@@ -61,8 +61,7 @@ models = [
     {"name": "MvoMlp", "param_grid": getattr(Settings, "mvo_final")},
     {"name": "EoMlp", "param_grid": getattr(Settings, "eo_final")},
     {"name": "NroMlp", "param_grid": getattr(Settings, "nro_final")},
-    {"name": "HgsoMlp", "param_grid": getattr(Settings, "hgso_final")},
-    {"name": "AsoMlp", "param_grid": getattr(Settings, "aso_final")},
+    {"name": "HgsoMlp", "param_grid": getattr(Settings, "hgso_final")}
 ]
 
 if __name__ == '__main__':

@@ -63,6 +63,7 @@ def multiprocessing_func(model):
 
 models = [
     {"name": "GaLstm", "param_grid": getattr(Settings, "ga_final")},
+    {"name": "FpaLstm", "param_grid": getattr(Settings, "fpa_final")},
     {"name": "DeLstm", "param_grid": getattr(Settings, "de_final")},
     {"name": "PsoLstm", "param_grid": getattr(Settings, "pso_final")},
     {"name": "WoaLstm", "param_grid": getattr(Settings, "woa_final")},
@@ -70,9 +71,9 @@ models = [
     {"name": "MvoLstm", "param_grid": getattr(Settings, "mvo_final")},
     {"name": "EoLstm", "param_grid": getattr(Settings, "eo_final")},
     {"name": "NroLstm", "param_grid": getattr(Settings, "nro_final")},
-    {"name": "HgsoLstm", "param_grid": getattr(Settings, "hgso_final")},
-    {"name": "AsoLstm", "param_grid": getattr(Settings, "aso_final")},
+    {"name": "HgsoLstm", "param_grid": getattr(Settings, "hgso_final")}
 ]
+
 
 if __name__ == '__main__':
     starttime = time()

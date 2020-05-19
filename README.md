@@ -6,9 +6,6 @@
 -series prediction.
 
 
-* First type running on javis
-* Second type running on 104
-
 # Models
 ### Traditional 
 1. MLNN 
@@ -27,7 +24,6 @@
 3. EO-MLP
 4. NRO-MLP
 5. HGSO-MLP
-6. ASO-MLP
 
 
 Hybrid MLP: That took: 5483.539757728577 seconds = 92 minutes

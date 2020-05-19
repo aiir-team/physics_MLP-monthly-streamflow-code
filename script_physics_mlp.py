@@ -44,7 +44,7 @@ def train_model(item):
 		"hidden_size": item["hidden_sizes"], "activations": item["activations"], "domain_range": SPF_DOMAIN_RANGE_HYBRID, "paras_name": paras_name
 	}
 
-	md = PhysicsMlp(root_base_paras=root_base_paras, root_hybrid_paras=root_hybrid_paras, algorithm_paras=algorithm_paras)
+	md = PhysicsMlp(root_base_paras, root_hybrid_paras, algorithm_paras)
 	md._running__()
 
 start_time = time.time()

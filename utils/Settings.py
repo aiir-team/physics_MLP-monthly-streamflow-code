@@ -65,7 +65,7 @@ physics_mlp_final = {
 mlnn1hl_final = {
 	"hidden_sizes": hidden_sizes_traditional,
 	"activations": SPF_ACTIVATIONS,
-	"learning_rate": [0.001],
+	"learning_rate": [0.1],
 	"epoch": epochs,
 	"batch_size": batch_sizes,
 	"optimizer": ['SGD'],

@@ -16,7 +16,7 @@ First way: (Do it by yourself)
     conda activate ai
 
     conda install pandas matplotlib scikit-learn scrapy seaborn
-    conda install -c anaconda tensorflow
+    conda install -c anaconda tensorflow tensorflow-gpu
     conda install -c anaconda ipython-notebook
     conda install -c conda-forge statsmodels
     conda install keras  

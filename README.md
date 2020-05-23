@@ -26,13 +26,7 @@
 5. HGSO-MLP
 
 
-Hybrid MLP: That took: 5483.539757728577 seconds = 92 minutes
-Traditional RNN: That took: 2723.2783584594727 seconds = 46 minutes
-MLNN: Taken: 877.7899332046509 seconds = 15 minutes
 
-
-Adam - 0.0001 ---> best
-
-Best:
-    GA: (0.9, 0.1/0.05/0.001) - (0.85, 0.15/0.05/0.001) - 
-    PSO: (2.0, 2.0)
+102: rnn_base (That took: 4672.810079097748 seconds) --> physics_mlp (Taken: 11428.168514251709 seconds)
+104: mlnn (done)--> hybrid_mlp (done)
+Cuong: hybrid_lstm (done)

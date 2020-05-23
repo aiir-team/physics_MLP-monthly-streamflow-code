@@ -8,7 +8,7 @@
 
 # Models
 ### Traditional 
-1. MLNN 
+1. MLP
 2. RNN 
 3. LSTM 
 ### Evolutionary 
@@ -23,10 +23,11 @@
 2. MVO-MLP
 3. EO-MLP
 4. NRO-MLP
-5. HGSO-MLP
 
-
-
-102: rnn_base (That took: 4672.810079097748 seconds) --> physics_mlp (Taken: 11428.168514251709 seconds)
-104: mlnn (done)--> hybrid_mlp (done)
-Cuong: hybrid_lstm (done)
+# How to run code
+1. Run MLP model by: mlp.py 
+2. Run Rnn-based model (RNN, LSTM) by: script_traditional_rrn_based.py (multiprocessing) 
+3. All hybrid-MLP model by: script_hybrid_mlp.py (multiprocessing also)
+4. Get the results table mean, std, cv by: get_table_results.py
+5. Results saved in folder: history/results/ based on daily or weekly datatype
+ 

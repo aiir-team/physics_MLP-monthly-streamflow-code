@@ -34,6 +34,11 @@ for datafile in data_files:
         table_std.append(t_std)
         table_var.append(t_var)
 
+        # print(t_var)
+        # t4 = dataframe.kurt()
+        # t5 = dataframe.skew()
+        # t6 = dataframe.describe()
+
     table_mean = np.array(table_mean)
     table_std = np.array(table_std)
     table_var = np.array(table_var)
@@ -45,21 +50,3 @@ for datafile in data_files:
     df_mean.to_csv(path_file + "/" + datafile + "_mean.csv")
     df_std.to_csv(path_file + "/" + datafile + "_std.csv")
     df_var.to_csv(path_file + "/" + datafile + "_var.csv")
-
-
-        # print(t_var)
-        # t4 = dataframe.kurt()
-        # t5 = dataframe.skew()
-        # t6 = dataframe.describe()
-
-
-
-
-        # print(t1)
-        # print(t2)
-        # print(t3)
-        # print(t4)
-        # print(t5)
-        # print(t6)
-        # print(dataframe)
-#

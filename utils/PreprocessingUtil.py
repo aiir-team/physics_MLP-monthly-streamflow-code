@@ -7,7 +7,7 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 # -------------------------------------------------------------------------------------------------------%
 
-from numpy import reshape, array, log, exp
+from numpy import reshape, array, log, exp, sign, abs, power
 
 
 class CheckDataset:
@@ -61,6 +61,8 @@ class TimeSeries:
             self.data_new = (self.data_original - self.data_min) / (self.data_max - self.data_min)
         elif scale_type == "loge":
             self.data_new = log(self.data_original)
+        elif scale_type == "kurtosis":
+            self.data_new = sign(self.data_original - self.data_mean) * power(abs(self.data_original - self.data_mean), 1.0/3)
         return self.data_new
 
     def _inverse_scaling__(self, data=None, scale_type="std"):
@@ -78,6 +80,8 @@ class TimeSeries:
             return data * (self.data_max - self.data_min) + self.data_min
         elif scale_type == "loge":
             return exp(data)
+        elif scale_type == "kurtosis":
+            return power(data, 3) + self.data_mean
 
     def _univariate_data__(self, dataset, history_column=None, start_index=0, end_index=None, pre_type="2D"):
         """

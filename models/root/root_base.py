@@ -50,7 +50,8 @@ class RootBase:
         item = {'model_name': self.filename, 'total_time_train': self.time_total_train, 'time_epoch': self.time_epoch,
                 'time_predict': self.time_predict, 'time_system': self.time_system,
                 'EVS': mm["evs"], 'ME': mm["me"], 'MAE': mm["mae"], "MSE": mm["mse"], "RMSE": mm["rmse"], "MSLE": mm["msle"], "MedAE": mm["medae"],
-                "R2": mm["r2"], "MRE": mm["mre"], "MAPE": mm["mape"], "SMAPE": mm["smape"], "MAAPE": mm["maape"], "MASE": mm["mase"]}
+                "R2": mm["r2"], "MRE": mm["mre"], "MAPE": mm["mape"], "SMAPE": mm["smape"], "MAAPE": mm["maape"], "MASE": mm["mase"],
+                "NSE": mm["nse"], "Willmott_Index": mm["wi"], "R": mm["r"], "Confidence": mm["c"]}
 
         _save_prediction_to_csv__(y_true, y_pred, y_true_scaled, y_pred_scaled, self.filename, self.path_save_result)
         _save_loss_train_to_csv__(loss_train, self.filename, self.path_save_result + "Error-")

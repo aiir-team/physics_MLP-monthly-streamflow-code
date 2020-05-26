@@ -13,7 +13,7 @@ SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"      # minmax, std, loge
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.7
-SPF_PATH_SAVE_BASE = "history/results3/"
+SPF_PATH_SAVE_BASE = "history/results1/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -25,7 +25,7 @@ SPF_LOAD_DATA_FROM = "dataset/test/"
 
 SPF_DATA_FILENAME = ["full_dataset2"]
 SPF_DATA_COLS = [[0]]
-SPF_DATA_WINDOWS = [[1, 2, 11, 12, 13]]  # Using ACF to determine which one will used
+SPF_DATA_WINDOWS = [[1, 11, 12, 13, 23, 24, 25]]  # Using ACF to determine which one will used
 
 ## Default settings
 SPF_HIDDEN_SIZES_HYBRID = [(7, True), ]             # (num_node, checker), default checker is True

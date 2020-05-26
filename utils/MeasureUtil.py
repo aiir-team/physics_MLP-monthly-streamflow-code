@@ -7,7 +7,7 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-from numpy import ndarray, array, max, round, sqrt, abs, where, mean, dot, divide, arctan
+from numpy import ndarray, array, max, round, sqrt, abs, where, mean, dot, divide, arctan, sum
 from sklearn.metrics import explained_variance_score, max_error, mean_absolute_error, mean_squared_error
 from sklearn.metrics import mean_squared_log_error, median_absolute_error, r2_score
 
@@ -36,6 +36,9 @@ class RegressionMetrics:
         self.number_rounding = number_rounding
 
     def evs_function(self):         # explained_variance_score
+        """
+            EV < 1. Larger is better
+        """
         if self.onedim:
             return round(explained_variance_score(self.y_true, self.y_pred), self.number_rounding)
         else:
@@ -86,12 +89,18 @@ class RegressionMetrics:
             return round(median_absolute_error(self.y_true, self.y_pred, multioutput=self.multi_output), self.number_rounding)
 
     def r2_function(self):  # r2_score
+        """
+            -1 < R2 < 1. Larger is better
+        """
         if self.onedim:
             return round(r2_score(self.y_true, self.y_pred), self.number_rounding)
         else:
             return round(r2_score(self.y_true, self.y_pred, multioutput=self.multi_output), self.number_rounding)
 
     def mre_function(self):     # Mean relative error
+        """
+            Good if mre < 40%
+        """
         if self.onedim:
             return round(mean(divide(abs(self.y_true - self.y_pred), self.y_true)), self.number_rounding)
         else:
@@ -105,12 +114,15 @@ class RegressionMetrics:
                     exit(0)
                 return round(dot(temp, weights), self.number_rounding)
             elif self.multi_output == "raw_values":
-                return round(mean(divide(abs(self.y_true - self.y_pred), self.y_true), axis=0), self.number_rounding)
+                return round(temp, self.number_rounding)
             else:
                 print("=========Not supported===================")
                 exit(0)
 
     def mape_function(self):  # mean_absolute_percentage_error
+        """
+            Good if mape < 30%
+        """
         if self.onedim:
             return round(mean(divide(abs(self.y_true - self.y_pred), abs(self.y_true))) * 100, self.number_rounding)
         else:
@@ -124,7 +136,7 @@ class RegressionMetrics:
                     exit(0)
                 return round(dot(temp, weights), self.number_rounding)
             elif self.multi_output == "raw_values":
-                return round(mean(divide(abs(self.y_true - self.y_pred), abs(self.y_true)), axis=0) * 100, self.number_rounding)
+                return round(temp, self.number_rounding)
             else:
                 print("=========Not supported===================")
                 exit(0)
@@ -143,13 +155,15 @@ class RegressionMetrics:
                     exit(0)
                 return round(dot(temp, weights), self.number_rounding)
             elif self.multi_output == "raw_values":
-                return round(mean(2 * abs(self.y_pred - self.y_true) / (abs(self.y_true) + abs(self.y_pred)), axis=0) * 100, self.number_rounding)
+                return round(temp, self.number_rounding)
             else:
                 print("=========Not supported===================")
                 exit(0)
 
     def maape_function(self):   # Mean Arctangent Absolute Percentage Error (output: radian values)
         # https://support.numxl.com/hc/en-us/articles/115001223463-MAAPE-Mean-Arctangent-Absolute-Percentage-Error
+        """
+        """
         if self.onedim:
             return round(mean(arctan(divide(abs(self.y_true - self.y_pred), self.y_true))), self.number_rounding)
         else:
@@ -163,7 +177,7 @@ class RegressionMetrics:
                     exit(0)
                 return round(dot(temp, weights), self.number_rounding)
             elif self.multi_output == "raw_values":
-                return round(mean(arctan(divide(abs(self.y_true - self.y_pred), self.y_true)), axis=0), self.number_rounding)
+                return round(temp, self.number_rounding)
             else:
                 print("=========Not supported===================")
                 exit(0)
@@ -190,6 +204,115 @@ class RegressionMetrics:
                 print("=========Not supported===================")
                 exit(0)
 
+    def nse_function(self):  # Nash-Sutcliffe efficiency coefficient
+        # https://agrimetsoft.com/calculators/Nash%20Sutcliffe%20model%20Efficiency%20coefficient
+        """
+            -unlimited < NSE < 1.   Larger is better
+        """
+        if self.onedim:
+            return round(1 - sum((self.y_true - self.y_pred) ** 2) / sum((self.y_true - mean(self.y_true)) ** 2), self.number_rounding)
+        else:
+            temp = 1 - sum((self.y_true - self.y_pred) ** 2, axis=0) / sum((self.y_true - mean(self.y_true, axis=0)) ** 2, axis=0)
+            if self.multi_output is None:
+                return round(mean(temp), self.number_rounding)
+            elif isinstance(self.multi_output, (tuple, list, set)):
+                weights = array(self.multi_output)
+                if self.y_true.ndim != len(weights):
+                    print("==========Failed because different dimension==============")
+                    exit(0)
+                return round(dot(temp, weights), self.number_rounding)
+            elif self.multi_output == "raw_values":
+                return round(temp, self.number_rounding)
+            else:
+                print("=========Not supported===================")
+                exit(0)
+
+
+    def wi_function(self):  # Willmott Index (WI) (Willmott, 1984):
+        # Reference evapotranspiration for Londrina, Paraná, Brazil: performance of different estimation methods
+        # https://www.researchgate.net/publication/319699360_Reference_evapotranspiration_for_Londrina_Parana_Brazil_performance_of_different_estimation_methods
+        """
+            0 < WI < 1. Larger is better
+        """
+        if self.onedim:
+            m1 = mean(self.y_true)
+            return round(1 - sum((self.y_pred - self.y_true) ** 2) / sum((abs(self.y_pred - m1) + abs(self.y_true - m1)) ** 2), self.number_rounding)
+        else:
+            m1 = mean(self.y_true, axis=0)
+            temp = 1 - sum((self.y_pred - self.y_true) ** 2, axis=0) / sum((abs(self.y_pred - m1) + abs(self.y_true - m1)) ** 2, axis=0)
+            if self.multi_output is None:
+                return round(mean(temp), self.number_rounding)
+            elif isinstance(self.multi_output, (tuple, list, set)):
+                weights = array(self.multi_output)
+                if self.y_true.ndim != len(weights):
+                    print("==========Failed because different dimension==============")
+                    exit(0)
+                return round(dot(temp, weights), self.number_rounding)
+            elif self.multi_output == "raw_values":
+                return round(temp, self.number_rounding)
+            else:
+                print("=========Not supported===================")
+                exit(0)
+
+    def r_function(self):  # Pearson’s correlation index (Willmott, 1984):
+        # Reference evapotranspiration for Londrina, Paraná, Brazil: performance of different estimation methods
+        # https://en.wikipedia.org/wiki/Pearson_correlation_coefficient
+        """
+            -1 < R < 1. Larger is better
+        """
+        if self.onedim:
+            m1, m2 = mean(self.y_true), mean(self.y_pred)
+            temp = sum((abs(self.y_true - m1) * abs(self.y_pred - m2))) / (sqrt(sum((self.y_true - m1)**2)) * sqrt(sum((self.y_pred - m2)**2)))
+            return round(temp, self.number_rounding)
+        else:
+            m1, m2 = mean(self.y_true, axis=0), mean(self.y_pred, axis=0)
+            t1 = sqrt(sum((self.y_true - m1) ** 2, axis=0))
+            t2 = sqrt(sum((self.y_pred - m2) ** 2, axis=0))
+            t3 = sum((abs(self.y_true - m1) * abs(self.y_pred - m2)), axis=0)
+            temp = t3 / (t1 * t2)
+            if self.multi_output is None:
+                return round(mean(temp), self.number_rounding)
+            elif isinstance(self.multi_output, (tuple, list, set)):
+                weights = array(self.multi_output)
+                if self.y_true.ndim != len(weights):
+                    print("==========Failed because different dimension==============")
+                    exit(0)
+                return round(dot(temp, weights), self.number_rounding)
+            elif self.multi_output == "raw_values":
+                return round(temp, self.number_rounding)
+            else:
+                print("=========Not supported===================")
+                exit(0)
+
+    def confidence_function(self):  # confidence or performance index (c)
+        # Reference evapotranspiration for Londrina, Paraná, Brazil: performance of different estimation methods
+        # https://www.researchgate.net/publication/319699360_Reference_evapotranspiration_for_Londrina_Parana_Brazil_performance_of_different_estimation_methods
+        """
+            > 0.85          Excellent
+            0.76-0.85       Very good
+            0.66-0.75       Good
+            0.61-0.65       Satisfactory
+            0.51-0.60       Poor
+            0.41-0.50       Bad
+            ≤ 0.40          Very bad
+        """
+        r = self.r_function()
+        d = self.wi_function()
+        if self.multi_output is None:
+            return round(mean(r*d), self.number_rounding)
+        elif isinstance(self.multi_output, (tuple, list, set)):
+            weights = array(self.multi_output)
+            if self.y_true.ndim != len(weights):
+                print("==========Failed because different dimension==============")
+                exit(0)
+            return round(dot(r*d, weights), self.number_rounding)
+        elif self.multi_output == "raw_values":
+            return round(r*d, self.number_rounding)
+        else:
+            print("=========Not supported===================")
+            exit(0)
+
+
     def _fit__(self):
         evs = self.evs_function()
         me = self.me_function()
@@ -204,5 +327,9 @@ class RegressionMetrics:
         smape = self.smape_function()
         maape = self.maape_function()
         mase = self.mase_function()
+        nse = self.nse_function()
+        wi = self.wi_function()
+        r = self.r_function()
+        c = self.confidence_function()
         return {"evs":evs, "me":me, "mae":mae, "mse":mse, "rmse":rmse, "msle":msle, "medae":medae,
-                "r2":r2, "mre":mre, "mape":mape, "smape":smape, "maape":maape, "mase":mase}
+                "r2":r2, "mre":mre, "mape":mape, "smape":smape, "maape":maape, "mase":mase, "nse": nse, "wi": wi, "r": r, "c": c}

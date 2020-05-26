@@ -12,7 +12,7 @@ SPF_2D_NETWORK = "2D"
 SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"      # minmax, std, loge
 SPF_FEATURE_SIZE = 1
-SPF_TRAIN_SPLIT = 0.7
+SPF_TRAIN_SPLIT = 0.75
 SPF_PATH_SAVE_BASE = "history/results1/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
@@ -23,9 +23,21 @@ SPF_LOAD_DATA_FROM = "dataset/test/"
 # SPF_DATA_COLS = [[1], [1]]
 # SPF_DATA_WINDOWS = [(1, 2, 3), (1, 49, 50, 54)]  # Using ACF to determine which one will used
 
+# SPF_DATA_FILENAME = ["full_dataset2"]
+# SPF_DATA_COLS = [[0]]
+# SPF_DATA_WINDOWS = [[1, 11, 12, 13, 23, 24, 25]]  # Using ACF to determine which one will used
+
 SPF_DATA_FILENAME = ["full_dataset2"]
 SPF_DATA_COLS = [[0]]
-SPF_DATA_WINDOWS = [[1, 11, 12, 13, 23, 24, 25]]  # Using ACF to determine which one will used
+SPF_DATA_WINDOWS = [
+	[
+		[1,5,6,7,11,12,13],
+		[1,2,10,11,12],
+		[1,2,3,4,5,6,7,8,9,10,11,12],
+		[1,4,5,6,7,8,11,12]
+	],
+
+]  # Using ACF to determine which one will used
 
 ## Default settings
 SPF_HIDDEN_SIZES_HYBRID = [(7, True), ]             # (num_node, checker), default checker is True
@@ -67,12 +79,12 @@ physics_mlp_final = {
 
 ####: MLNN-1HL
 mlnn1hl_final = {
-	"hidden_sizes": hidden_sizes_traditional,
+	"hidden_sizes": [(20, False)],      # True: 20, False: 2*n+1
 	"activations": SPF_ACTIVATIONS,
-	"learning_rate": [0.01, 0.001],
+	"learning_rate": [0.01],
 	"epoch": epochs,
 	"batch_size": batch_sizes,
-	"optimizer": ['Adam'],
+	"optimizer": ['sgd', 'rmsprop', 'adagrad', 'adadelta', 'adam', 'adamax', 'nadam'],
 	"loss": losses
 }
 

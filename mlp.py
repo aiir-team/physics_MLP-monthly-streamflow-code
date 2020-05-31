@@ -14,7 +14,7 @@ from sklearn.model_selection import ParameterGrid
 from models.main.traditional_mlp import Mlnn1HL
 from utils.IOUtil import _load_dataset__
 from utils.Settings import *
-from utils.Settings import mlnn1hl_final as param_grid
+from utils.Settings import mlp_final as param_grid
 import time
 import tensorflow as tf
 

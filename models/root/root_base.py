@@ -14,9 +14,7 @@ from utils.GraphUtil import _draw_predict_with_error__
 
 
 class RootBase:
-    """
-		This is the root of all networks
-	"""
+    """ This is the root of all networks """
 
     def __init__(self, root_base_paras=None):
         self.data_original = root_base_paras["data_original"]

@@ -13,7 +13,7 @@ SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"      # minmax, std, loge
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results1/"
+SPF_PATH_SAVE_BASE = "history/results/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -27,28 +27,33 @@ SPF_LOAD_DATA_FROM = "dataset/test/"
 # SPF_DATA_COLS = [[0]]
 # SPF_DATA_WINDOWS = [[1, 11, 12, 13, 23, 24, 25]]  # Using ACF to determine which one will used
 
-SPF_DATA_FILENAME = ["full_dataset2"]
-SPF_DATA_COLS = [[0]]
+SPF_DATA_FILENAME = ["full_dataset"]
+SPF_DATA_COLS = [[1]]
 SPF_DATA_WINDOWS = [
-	[
-		[1,5,6,7,11,12,13],
-		[1,2,10,11,12],
-		[1,2,3,4,5,6,7,8,9,10,11,12],
-		[1,4,5,6,7,8,11,12]
-	],
-
-]  # Using ACF to determine which one will used
+	[   ## full_dataset
+		[1, 4, 5, 6, 7, 8, 11, 12]
+	]
+]
+# SPF_DATA_WINDOWS = [
+# 	[
+# 		[1,5,6,7,11,12,13],
+# 		[1,2,10,11,12],
+# 		[1,2,3,4,5,6,7,8,9,10,11,12],
+# 		[1,4,5,6,7,8,11,12]
+# 	],
+#
+# ]  # Using ACF to determine which one will used
 
 ## Default settings
-SPF_HIDDEN_SIZES_HYBRID = [(7, True), ]             # (num_node, checker), default checker is True
+SPF_HIDDEN_SIZES_HYBRID = [(7, False), ]             # (num_node, checker), default checker is True
 SPF_DOMAIN_RANGE_HYBRID = (-1, 1)                   # For all hybrid models
 SPF_ACTIVATIONS = [("elu", "elu")]
 
-SPF_HIDDEN_SIZES_HYBRID_RNN = [([7, ], True), ]     # For hybrid LSTM
+SPF_HIDDEN_SIZES_HYBRID_RNN = [([7, ], False), ]     # For hybrid LSTM
 
 ###### Setting for paper running on server ==============================
 epochs = [1000]
-hidden_sizes_traditional = [(20, True), ]  # (num_node, checker), default checker is True
+hidden_sizes_traditional = [(20, False), ]  # (num_node, checker), default checker is True
 learning_rates = [0.1]
 optimizers = ['SGD']  ## SGD, Adam, Adagrad, Adadelta, RMSprop, Adamax, Nadam
 losses = ["mse"]
@@ -58,25 +63,6 @@ pop_sizes = [50]
 
 ###================= Settings models for paper ============================####
 
-####: Physics MLP
-physics_mlp_final = {
-	"hidden_sizes": SPF_HIDDEN_SIZES_HYBRID,
-	"activations": SPF_ACTIVATIONS,
-
-	"epoch": epochs,                #### : EO/NRO - MLP/RNN/LSTM/GRU/CNN
-	"pop_size": pop_sizes,
-
-	"RT": [3],                      #### : WDO-MLP/RNN/LSTM/GRU/CNN
-	"g": [0.2],
-	"alp": [0.4],
-	"c": [0.4],
-	"max_v": [0.3],
-
-	"wep_minmax": [(1.0, 0.2), ],   #### : MVO-MLP/RNN/LSTM/GRU/CNN
-
-	"n_clusters": [2, ]             #### : HGSO-MLP/RNN/LSTM/GRU/CNN
-}
-
 ####: MLNN-1HL
 mlnn1hl_final = {
 	"hidden_sizes": [(20, False)],      # True: 20, False: 2*n+1
@@ -85,6 +71,17 @@ mlnn1hl_final = {
 	"epoch": epochs,
 	"batch_size": batch_sizes,
 	"optimizer": ['sgd', 'rmsprop', 'adagrad', 'adadelta', 'adam', 'adamax', 'nadam'],
+	"loss": losses
+}
+
+####: MLP
+mlp_final = {
+	"hidden_sizes": hidden_sizes_traditional,
+	"activations": SPF_ACTIVATIONS,
+	"learning_rate": learning_rates,
+	"epoch": epochs,
+	"batch_size": batch_sizes,
+	"optimizer": ['sgd'],
 	"loss": losses
 }
 
@@ -137,8 +134,8 @@ fpa_final = {
 ga_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes,
-	"pc": [0.8],  # 0.85 -> 0.97
-	"pm": [0.2]  # 0.005 -> 0.10
+	"pc": [0.9],  # 0.85 -> 0.97
+	"pm": [0.1]  # 0.005 -> 0.10
 }
 
 #### : DE-MLP/RNN/LSTM/GRU/CNN

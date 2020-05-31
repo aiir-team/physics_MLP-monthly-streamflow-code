@@ -23,8 +23,8 @@ class Mlnn1HL(RootMlp):
 		self.model.add(Dense(units=self.hidden_sizes[0], input_dim=self.X_train.shape[1], activation=self.activations[0]))
 		self.model.add(Dense(1, activation=self.activations[1]))
 		self.opt = getattr(optimizers, self.optimizer)(learning_rate=self.learning_rate)
-		# self.model.compile(optimizer=self.opt, loss=self.loss)
-		self.model.compile(optimizer=self.optimizer, loss=self.loss)
+		self.model.compile(optimizer=self.opt, loss=self.loss)
+		# self.model.compile(optimizer=self.optimizer, loss=self.loss)
 		ml = self.model.fit(self.X_train, self.y_train, epochs=self.epoch, batch_size=self.batch_size, verbose=self.log)
 		self.loss_train = ml.history["loss"]
 

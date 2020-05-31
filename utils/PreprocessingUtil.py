@@ -75,7 +75,7 @@ class TimeSeries:
         :rtype:
         """
         if scale_type == "std":
-            return self.data_std * data - self.data_mean
+            return self.data_std * data + self.data_mean
         elif scale_type == "minmax":
             return data * (self.data_max - self.data_min) + self.data_min
         elif scale_type == "loge":

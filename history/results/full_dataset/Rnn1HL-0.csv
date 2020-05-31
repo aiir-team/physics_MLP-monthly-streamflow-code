@@ -1,3 +1,0 @@
-model_name,total_time_train,time_epoch,time_predict,time_system,EVS,ME,MAE,MSE,RMSE,MSLE,MedAE,R2,MRE,MAPE,SMAPE,MAAPE,MASE,NSE,Willmott_Index,R,Confidence
-"RNN-1HL-Rnn1HL-run_0-hs_(20, False)-ep_5-bs_32-lr_0.1-ac_('elu', 'elu')-op_SGD-lo_mse-dr_(0.2,)",2.6152,0.523,0.17178869,2.8304,0.075,23.60172940731048,4.638,31.6197,5.6231,0.3771,4.1965,0.0297,0.9007,90.066,62.0636,0.657,1.633,0.0297,0.3023,0.6666,0.2015
-"RNN-1HL-Rnn1HL-run_1-hs_(20, False)-ep_5-bs_32-lr_0.1-ac_('elu', 'elu')-op_SGD-lo_mse-dr_(0.2,)",2.267,0.4534,0.23853159,2.5309,0.1132,25.220908036231986,3.2773,31.2687,5.5918,0.2523,1.6202,0.0405,0.4082,40.8157,41.9455,0.3707,1.1539,0.0405,0.3765,0.6741,0.2538

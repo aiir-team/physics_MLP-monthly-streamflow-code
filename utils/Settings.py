@@ -7,7 +7,7 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-SPF_RUN_TIMES = 10
+SPF_RUN_TIMES = 2
 SPF_2D_NETWORK = "2D"
 SPF_3D_NETWORK = "3D"
 SPF_SCALING = "minmax"      # minmax, std, loge
@@ -52,7 +52,7 @@ SPF_ACTIVATIONS = [("elu", "elu")]
 SPF_HIDDEN_SIZES_HYBRID_RNN = [([7, ], False), ]     # For hybrid LSTM
 
 ###### Setting for paper running on server ==============================
-epochs = [1000]
+epochs = [5]
 hidden_sizes_traditional = [(20, False), ]  # (num_node, checker), default checker is True
 learning_rates = [0.1]
 optimizers = ['SGD']  ## SGD, Adam, Adagrad, Adadelta, RMSprop, Adamax, Nadam

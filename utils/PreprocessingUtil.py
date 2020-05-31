@@ -42,18 +42,18 @@ class TimeSeries:
         self.train_mean, self.train_std, self.train_min, self.train_max = None, None, None, None
         self.data_mean, self.data_std, self.data_min, self.data_max = None, None, None, None
 
-    def _scaling__(self, scale_type="std", separate=False):
+    def _scaling__(self, scale_type="std", separate=True):
         """
         :param dataset: 2D numpy array
         :param scale_type: std / minmax
         :return:
         """
         if separate:
-            self.data_mean, self.data_std = self.data_original.mean(axis=0), self.data_original.std(axis=0)
-            self.data_min, self.data_max = self.data_original.min(axis=0), self.data_original.max(axis=0)
-        else:
             self.data_mean, self.data_std = self.data_original[:self.train_split].mean(axis=0), self.data_original[:self.train_split].std(axis=0)
             self.data_min, self.data_max = self.data_original[:self.train_split].min(axis=0), self.data_original[:self.train_split].max(axis=0)
+        else:
+            self.data_mean, self.data_std = self.data_original.mean(axis=0), self.data_original.std(axis=0)
+            self.data_min, self.data_max = self.data_original.min(axis=0), self.data_original.max(axis=0)
 
         if scale_type == "std":
             self.data_new = (self.data_original - self.data_mean) / self.data_std

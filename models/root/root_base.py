@@ -38,7 +38,7 @@ class RootBase:
     def _processing__(self):
         ## standardize the dataset using the mean and standard deviation of the training data.
         self.time_series = TimeSeries(data=self.data_original, train_split=self.train_split)
-        data_new = self.time_series._scaling__(self.scaling)
+        data_new = self.time_series._scaling__(self.scaling, False)
         self.X_train, self.y_train = self.time_series._univariate_data__(data_new, self.data_window, 0, self.time_series.train_split, self.network_type)
         self.X_test, self.y_test = self.time_series._univariate_data__(data_new, self.data_window, self.time_series.train_split, None, self.network_type)
 

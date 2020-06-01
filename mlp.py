@@ -14,15 +14,14 @@ from sklearn.model_selection import ParameterGrid
 from models.main.traditional_mlp import Mlnn1HL
 from utils.IOUtil import _load_dataset__
 from utils.Settings import *
-from utils.Settings import mlp_final as param_grid
+from utils.Settings import mlnn1hl_final as param_grid
 import time
-import tensorflow as tf
 
-tf.config.threading.set_intra_op_parallelism_threads(2)  # matrix multiplication and reductions
-tf.config.threading.set_inter_op_parallelism_threads(2)  # number of threads used by independent non-blocking operations
-
-# if platform.system() == "Linux":  # Linux: "Linux", Mac: "Darwin", Windows: "Windows"
-#     os.sched_setaffinity(0, {1})
+if platform.system() == "Linux":  # Linux: "Linux", Mac: "Darwin", Windows: "Windows"
+    os.sched_setaffinity(0, {1})
+    import tensorflow as tf
+    tf.config.threading.set_intra_op_parallelism_threads(2)  # matrix multiplication and reductions
+    tf.config.threading.set_inter_op_parallelism_threads(2)  # number of threads used by independent non-blocking operations
 
 # name of the models ==> such as: rnn1hl.csv
 model_name = str(splitext(basename(realpath(__file__)))[0])

@@ -55,10 +55,12 @@ def setting_and_running_multi_processing(my_model):
 
 models = [
     {"name": "GaMlp", "param_grid": getattr(Settings, "ga_final")},
-    {"name": "FpaMlp", "param_grid": getattr(Settings, "fpa_final")},
     {"name": "DeMlp", "param_grid": getattr(Settings, "de_final")},
+    {"name": "FpaMlp", "param_grid": getattr(Settings, "fpa_final")},
     {"name": "PsoMlp", "param_grid": getattr(Settings, "pso_final")},
     {"name": "WoaMlp", "param_grid": getattr(Settings, "woa_final")},
+    {"name": "GwoMlp", "param_grid": getattr(Settings, "gwo_final")},
+    {"name": "SsaMlp", "param_grid": getattr(Settings, "ssa_final")},
     {"name": "WdoMlp", "param_grid": getattr(Settings, "wdo_final")},
     {"name": "MvoMlp", "param_grid": getattr(Settings, "mvo_final")},
     {"name": "EoMlp", "param_grid": getattr(Settings, "eo_final")},

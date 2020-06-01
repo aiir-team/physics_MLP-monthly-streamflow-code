@@ -9,22 +9,9 @@
 
 from models.root.hybrid.root_hybrid_mlp import RootHybridMlp
 from mealpy.evolutionary_based import GA, DE, FPA
-from mealpy.swarm_based import PSO, WOA
+from mealpy.swarm_based import PSO, WOA, GWO, SpaSA
 from mealpy.physics_based import WDO, MVO, EO, NRO, HGSO
 from time import time
-
-
-class FpaMlp(RootHybridMlp):
-    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
-        RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
-        self.epoch = algo_paras["epoch"]
-        self.pop_size = algo_paras["pop_size"]
-        self.p = algo_paras["p"]
-        self.filename = root_hybrid_paras["paras_name"]
-
-    def _training__(self):
-        md_temp = FPA.BaseFPA(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size, self.p)
-        self.solution, self.best_fit, self.loss_train = md_temp._train__()
 
 
 class GaMlp(RootHybridMlp):
@@ -53,6 +40,19 @@ class DeMlp(RootHybridMlp):
     def _training__(self):
         de = DE.BaseDE(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size, self.wf, self.cr)
         self.solution, self.best_fit, self.loss_train = de._train__()
+
+
+class FpaMlp(RootHybridMlp):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
+        RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
+        self.p = algo_paras["p"]
+        self.filename = root_hybrid_paras["paras_name"]
+
+    def _training__(self):
+        md_temp = FPA.BaseFPA(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size, self.p)
+        self.solution, self.best_fit, self.loss_train = md_temp._train__()
 
 
 class PsoMlp(RootHybridMlp):
@@ -99,6 +99,30 @@ class WdoMlp(RootHybridMlp):
     def _training__(self):
         md = WDO.BaseWDO(self._objective_function__, self.problem_size, self.domain_range, self.log,
                          self.epoch, self.pop_size, self.RT, self.g, self.alp, self.c, self.max_v)
+        self.solution, self.best_fit, self.loss_train = md._train__()
+
+
+class GwoMlp(RootHybridMlp):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
+        RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
+        self.filename = root_hybrid_paras["paras_name"]
+
+    def _training__(self):
+        md = GWO.BaseGWO(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size)
+        self.solution, self.best_fit, self.loss_train = md._train__()
+
+
+class SsaMlp(RootHybridMlp):
+    def __init__(self, root_base_paras=None, root_hybrid_paras=None, algo_paras=None):
+        RootHybridMlp.__init__(self, root_base_paras, root_hybrid_paras)
+        self.epoch = algo_paras["epoch"]
+        self.pop_size = algo_paras["pop_size"]
+        self.filename = root_hybrid_paras["paras_name"]
+
+    def _training__(self):
+        md = SpaSA.BaseSpaSA(self._objective_function__, self.problem_size, self.domain_range, self.log, self.epoch, self.pop_size)
         self.solution, self.best_fit, self.loss_train = md._train__()
 
 

@@ -7,13 +7,13 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-SPF_RUN_TIMES = 10
+SPF_RUN_TIMES = 3
 SPF_2D_NETWORK = "2D"
 SPF_3D_NETWORK = "3D"
-SPF_SCALING = "minmax"      # minmax, std, loge
+SPF_SCALING = "std"      # minmax, std, loge
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results1/"
+SPF_PATH_SAVE_BASE = "history/results2_test_more_on_mlp/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -31,6 +31,8 @@ SPF_DATA_FILENAME = ["full_dataset"]
 SPF_DATA_COLS = [[1]]
 SPF_DATA_WINDOWS = [
 	[   ## full_dataset
+		[1, 5, 6, 7, 11, 12],
+		[1, 4, 5, 6, 7, 8, 11, 12],
 		[1, 4, 5, 6, 7, 8, 11, 12],
 		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
 	]
@@ -159,6 +161,18 @@ pso_final = {
 
 #### : WOA-MLP/RNN/LSTM/GRU/CNN
 woa_final = {
+	"epoch": epochs,
+	"pop_size": pop_sizes
+}
+
+#### : GWO-MLP/RNN/LSTM/GRU/CNN
+gwo_final = {
+	"epoch": epochs,
+	"pop_size": pop_sizes
+}
+
+#### : SSA-MLP/RNN/LSTM/GRU/CNN
+ssa_final = {
 	"epoch": epochs,
 	"pop_size": pop_sizes
 }

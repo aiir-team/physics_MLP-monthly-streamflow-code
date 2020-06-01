@@ -43,6 +43,8 @@ class RootBase:
         self.X_test, self.y_test = self.time_series._univariate_data__(data_new, self.data_window, self.time_series.train_split, None, self.network_type)
 
     def _save_results__(self, y_true=None, y_pred=None, y_true_scaled=None, y_pred_scaled=None, loss_train=None):
+        # For this project only
+        y_pred[y_pred < 0] = 0
         measure_unscaled = RegressionMetrics(y_true, y_pred, None, number_rounding=4)
         mm = measure_unscaled._fit__()
         item = {'model_name': self.filename, 'total_time_train': self.time_total_train, 'time_epoch': self.time_epoch,
@@ -54,7 +56,7 @@ class RootBase:
         _save_prediction_to_csv__(y_true, y_pred, y_true_scaled, y_pred_scaled, self.filename, self.path_save_result)
         _save_loss_train_to_csv__(loss_train, self.filename, self.path_save_result + "Error-")
         if self.draw:
-            _draw_predict_with_error__([y_true, y_pred], [mm["rmse"], mm["mae"]], self.filename, self.path_save_result)
+            _draw_predict_with_error__([y_true, y_pred], [mm["r"], mm["c"]], self.filename, self.path_save_result)
         if self.log:
             print('Predict DONE - RMSE: %f, MAE: %f' % (mm["rmse"], mm["mae"]))
         _save_results_to_csv__(item, self.log_filename, self.path_save_result)

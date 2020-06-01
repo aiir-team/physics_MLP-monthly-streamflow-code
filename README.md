@@ -5,6 +5,7 @@
 1. MLP
 2. RNN 
 3. LSTM 
+4. GRU
 ### Evolutionary 
 1. GA-MLP
 2. DE-MLP
@@ -12,11 +13,14 @@
 ### Swarm 
 1. PSO-MLP
 2. WOA-MLP
+3. GWO-MLP  (Grey Wolf Optimization)
+4. SpaSA-MLP (Maybe this one is our proposed)
 ### Physics (Our proposed)
 1. WDO-MLP
 2. MVO-MLP
 3. EO-MLP
 4. NRO-MLP
+5. HGSO-MLP
 
 ## How to run code
 1. Run MLP model by: mlp.py 

@@ -10,13 +10,15 @@
 import pandas as pd
 import numpy as np
 
-path_file = "history/results/"
-data_files = ["daily_rainfall_22022020", "weekly_rainfall_22022020"]
-model_files = ["mlp", "Rnn1HL", "Lstm1HL", "GaMlp", "DeMlp", "FpaMlp", "PsoMlp", "WoaMlp", "WdoMlp", "MvoMlp", "EoMlp", "NroMlp"]
-model_files2 = ["MLP", "RNN", "LSTM", "GA-MLP", "DE-MLP", "FPA-MLP", "PSO-MLP", "WOA-MLP", "WDO-MLP", "MVO-MLP", "EO-MLP", "NRO-MLP"]
-cols = ["model_name", "EVS", "ME", "MAE", "MSE", "RMSE", "MSLE", "MedAE", "R2", "SMAPE", "MAAPE", "MASE"]
-cols_error = ["Epoch", "MSE"]
-cols_predict = ["y_true", "y_pred"]
+path_file = "results3_final/"
+data_files = ["full_dataset"]
+
+model_files = ["mlp0", "Rnn1HL-0", "Lstm1HL-0", "GaMlp-0", "DeMlp-0", "FpaMlp-0", "PsoMlp-0", "WoaMlp-0", "GwoMlp-0", "SsaMlp-0",
+               "WdoMlp-0", "MvoMlp-0", "EoMlp-0", "NroMlp-0", "HgsoMlp-0"]
+model_files2 = ["MLP", "RNN", "LSTM", "GA-MLP", "DE-MLP", "FPA-MLP", "PSO-MLP", "WOA-MLP", "GWO-MLP", "SSA-MLP",
+                "WDO-MLP", "MVO-MLP", "EO-MLP", "NRO-MLP", "HGSO-MLP"]
+
+cols = ["model_name", "EVS", "MAE", "MSE", "RMSE", "MSLE", "R2", "MRE", "MAPE", "SMAPE", "MAAPE", "MASE", "NSE", "Willmott_Index", "R", "Confidence"]
 
 cols_error_final = ["Epoch"] + model_files2
 cols_predict_final = ["Actual"] + model_files2
@@ -33,7 +35,7 @@ for datafile in data_files:
         file_error = path_file + datafile + "/Error-" + best_model_name + ".csv"
         file_predict = path_file + datafile + "/" + best_model_name + ".csv"
 
-        if modelfile == "mlp":
+        if modelfile == "mlp0":
             df_error = pd.read_csv(file_error, usecols=["Epoch", "MSE"])
             csv_error = df_error.values
 

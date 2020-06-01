@@ -10,11 +10,14 @@
 import pandas as pd
 import numpy as np
 
-path_file = "history/results/"
-data_files = ["daily_rainfall_22022020", "weekly_rainfall_22022020"]
-model_files = ["mlp", "Rnn1HL", "Lstm1HL", "GaMlp", "DeMlp", "FpaMlp", "PsoMlp", "WoaMlp", "WdoMlp", "MvoMlp", "EoMlp", "NroMlp", "HgsoMlp"]
-model_files2 = ["MLP", "RNN", "LSTM", "GA-MLP", "DE-MLP", "FPA-MLP", "PSO-MLP", "WOA-MLP", "WDO-MLP", "MVO-MLP", "EO-MLP", "NRO-MLP", "HGSO-MLP"]
-cols = ["EVS", "ME", "MAE",	"MSE", "RMSE", "MSLE", "MedAE", "R2", "SMAPE", "MAAPE", "MASE"]
+path_file = "results3_final/"
+data_files = ["full_dataset"]
+model_files = ["mlp0", "Rnn1HL-0", "Lstm1HL-0", "GaMlp-0", "DeMlp-0", "FpaMlp-0", "PsoMlp-0", "WoaMlp-0", "GwoMlp-0", "SsaMlp-0",
+               "WdoMlp-0", "MvoMlp-0", "EoMlp-0", "NroMlp-0", "HgsoMlp-0"]
+model_files2 = ["MLP", "RNN", "LSTM", "GA-MLP", "DE-MLP", "FPA-MLP", "PSO-MLP", "WOA-MLP", "GWO-MLP", "SSA-MLP",
+                "WDO-MLP", "MVO-MLP", "EO-MLP", "NRO-MLP", "HGSO-MLP"]
+
+cols = ["EVS", "MAE", "MSE", "RMSE", "MSLE", "R2", "MRE", "MAPE", "SMAPE", "MAAPE", "MASE", "NSE", "Willmott_Index", "R", "Confidence"]
 
 for datafile in data_files:
     table_mean = []
@@ -47,6 +50,6 @@ for datafile in data_files:
     df_std = pd.DataFrame(data=table_std, columns=cols, index=model_files2)
     df_var = pd.DataFrame(data=table_var, columns=cols, index=model_files2)
 
-    df_mean.to_csv(path_file + "/" + datafile + "_mean.csv")
-    df_std.to_csv(path_file + "/" + datafile + "_std.csv")
-    df_var.to_csv(path_file + "/" + datafile + "_var.csv")
+    df_mean.to_csv(path_file + "/csv/" + datafile + "_mean.csv")
+    df_std.to_csv(path_file + "/csv/" + datafile + "_std.csv")
+    df_var.to_csv(path_file + "/csv/" + datafile + "_var.csv")

@@ -7,13 +7,13 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-SPF_RUN_TIMES = 3
+SPF_RUN_TIMES = 10
 SPF_2D_NETWORK = "2D"
 SPF_3D_NETWORK = "3D"
 SPF_SCALING = "std"      # minmax, std, loge
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results2_test_more_on_mlp/"
+SPF_PATH_SAVE_BASE = "history/results3_final/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -30,13 +30,17 @@ SPF_LOAD_DATA_FROM = "dataset/test/"
 SPF_DATA_FILENAME = ["full_dataset"]
 SPF_DATA_COLS = [[1]]
 SPF_DATA_WINDOWS = [
-	[   ## full_dataset
-		[1, 5, 6, 7, 11, 12],
-		[1, 4, 5, 6, 7, 8, 11, 12],
-		[1, 4, 5, 6, 7, 8, 11, 12],
-		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+	[  ## full_dataset
+		[1, 4, 5, 6, 7, 8, 11, 12],  # c = 91
 	]
 ]
+# SPF_DATA_WINDOWS = [
+# 	[   ## full_dataset
+# 		[1, 5, 6, 7, 11, 12],                       # c = 90
+# 		[1, 4, 5, 6, 7, 8, 11, 12],                 # c = 91
+# 		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],    # c = 89
+# 	]
+# ]
 # SPF_DATA_WINDOWS = [
 # 	[
 # 		[1,5,6,7,11,12,13],
@@ -55,7 +59,7 @@ SPF_ACTIVATIONS = [("elu", "elu")]
 SPF_HIDDEN_SIZES_HYBRID_RNN = [([7, ], False), ]     # For hybrid LSTM
 
 ###### Setting for paper running on server ==============================
-epochs = [1500]
+epochs = [2000]
 hidden_sizes_traditional = [(20, False), ]  # (num_node, checker), default checker is True
 learning_rates = [0.1]
 optimizers = ['SGD']  ## SGD, Adam, Adagrad, Adadelta, RMSprop, Adamax, Nadam
@@ -126,13 +130,6 @@ gru1hl_final = {
 
 #### ============== Hybrid MLP/RNN/LSTM/GRU/CNN ==============================######
 
-#### : FPA-MLP/RNN/LSTM/GRU/CNN
-fpa_final = {
-	"epoch": epochs,
-	"pop_size": pop_sizes,
-	"p": [0.8]
-}
-
 #### : GA-MLP/RNN/LSTM/GRU/CNN
 ga_final = {
 	"epoch": epochs,
@@ -147,6 +144,13 @@ de_final = {
 	"pop_size": pop_sizes,
 	"wf": [0.8],
 	"cr": [0.9]
+}
+
+#### : FPA-MLP/RNN/LSTM/GRU/CNN
+fpa_final = {
+	"epoch": epochs,
+	"pop_size": pop_sizes,
+	"p": [0.8]
 }
 
 #### : PSO-MLP/RNN/LSTM/GRU/CNN

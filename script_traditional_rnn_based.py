@@ -18,9 +18,9 @@ import platform
 import os
 
 if platform.system() == "Linux":        # Linux: "Linux", Mac: "Darwin", Windows: "Windows"
-    os.environ['MKL_NUM_THREADS'] = '2'
-    os.environ['GOTO_NUM_THREADS'] = '2'
-    os.environ['OMP_NUM_THREADS'] = '2'
+    os.environ['MKL_NUM_THREADS'] = '1'
+    os.environ['GOTO_NUM_THREADS'] = '1'
+    os.environ['OMP_NUM_THREADS'] = '1'
 
     import tensorflow as tf
     tf.config.threading.set_intra_op_parallelism_threads(2)  # matrix multiplication and reductions

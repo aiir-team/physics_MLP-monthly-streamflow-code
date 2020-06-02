@@ -17,7 +17,7 @@ from models.root.traditional.root_rnn import RootRnn
 class Rnn1HL(RootRnn):
 	def __init__(self, root_base_paras=None, root_rnn_paras=None):
 		RootRnn.__init__(self, root_base_paras, root_rnn_paras)
-		self.filename = "RNN-1HL-" + root_rnn_paras["paras_name"]
+		self.filename = root_rnn_paras["paras_name"]
 
 	def _training__(self):
 		#  The RNN 1-HL architecture
@@ -34,7 +34,7 @@ class Rnn1HL(RootRnn):
 class Rnn2HL(RootRnn):
 	def __init__(self, root_base_paras=None, root_rnn_paras=None):
 		RootRnn.__init__(self, root_base_paras, root_rnn_paras)
-		self.filename = "RNN-2HL-" + root_rnn_paras["paras_name"]
+		self.filename = root_rnn_paras["paras_name"]
 
 	def _training__(self):
 		#  The RNN 2-HL architecture
@@ -53,7 +53,7 @@ class Rnn2HL(RootRnn):
 class Lstm1HL(RootRnn):
 	def __init__(self, root_base_paras=None, root_rnn_paras=None):
 		RootRnn.__init__(self, root_base_paras, root_rnn_paras)
-		self.filename = "LSTM-1HL-" + root_rnn_paras["paras_name"]
+		self.filename = root_rnn_paras["paras_name"]
 
 	def _training__(self):
 		#  The LSTM 1-HL architecture
@@ -69,7 +69,7 @@ class Lstm1HL(RootRnn):
 class Lstm2HL(RootRnn):
 	def __init__(self, root_base_paras=None, root_rnn_paras=None):
 		RootRnn.__init__(self, root_base_paras, root_rnn_paras)
-		self.filename = "LSTM-2HL-" + root_rnn_paras["paras_name"]
+		self.filename = root_rnn_paras["paras_name"]
 
 	def _training__(self):
 		#  The LSTM 2-HL architecture
@@ -86,7 +86,7 @@ class Lstm2HL(RootRnn):
 class Gru1HL(RootRnn):
 	def __init__(self, root_base_paras=None, root_rnn_paras=None):
 		RootRnn.__init__(self, root_base_paras, root_rnn_paras)
-		self.filename = "GRU-1HL-" + root_rnn_paras["paras_name"]
+		self.filename = root_rnn_paras["paras_name"]
 
 	def _training__(self):
 		#  The GRU 1-HL architecture
@@ -103,7 +103,7 @@ class Gru1HL(RootRnn):
 class Gru2HL(RootRnn):
 	def __init__(self, root_base_paras=None, root_rnn_paras=None):
 		RootRnn.__init__(self, root_base_paras, root_rnn_paras)
-		self.filename = "GRU-2HL-" + root_rnn_paras["paras_name"]
+		self.filename = root_rnn_paras["paras_name"]
 
 	def _training__(self):
 		#  The GRU 2-HL architecture
@@ -122,7 +122,7 @@ class Gru2HL(RootRnn):
 class Cnn1(RootRnn):
 	def __init__(self, root_base_paras=None, root_rnn_paras=None, cnn_paras=None):
 		RootRnn.__init__(self, root_base_paras, root_rnn_paras)
-		self.filename = "CNN1-" + root_rnn_paras["paras_name"]
+		self.filename = root_rnn_paras["paras_name"]
 		self.filters_size = cnn_paras["filters_size"]
 		self.kernel_size = cnn_paras["kernel_size"]
 		self.pool_size = cnn_paras["pool_size"]

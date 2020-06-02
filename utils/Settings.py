@@ -13,7 +13,7 @@ SPF_3D_NETWORK = "3D"
 SPF_SCALING = "std"      # minmax, std, loge
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results4_final/"
+SPF_PATH_SAVE_BASE = "history/results5_final/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -52,11 +52,11 @@ SPF_DATA_WINDOWS = [
 # ]  # Using ACF to determine which one will used
 
 ## Default settings
-SPF_HIDDEN_SIZES_HYBRID = [(9, True), ]             # (num_node, checker), default checker is True
+SPF_HIDDEN_SIZES_HYBRID = [(4, True), ]             # (num_node, checker), default checker is True
 SPF_DOMAIN_RANGE_HYBRID = (-1, 1)                   # For all hybrid models
 SPF_ACTIVATIONS = [("elu", "elu")]
 
-SPF_HIDDEN_SIZES_HYBRID_RNN = [([9, ], True), ]     # For hybrid LSTM
+SPF_HIDDEN_SIZES_HYBRID_RNN = [([4, ], True), ]     # For hybrid LSTM
 
 ###### Setting for paper running on server ==============================
 epochs = [2000]

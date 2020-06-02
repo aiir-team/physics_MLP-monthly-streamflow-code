@@ -61,7 +61,7 @@ SPF_HIDDEN_SIZES_HYBRID_RNN = [([4, ], True), ]     # For hybrid LSTM
 ###### Setting for paper running on server ==============================
 epochs = [2000]
 hidden_sizes_traditional = [(20, False), ]  # (num_node, checker), default checker is True
-learning_rates = [0.1]
+learning_rates = [0.15]
 optimizers = ['SGD']  ## SGD, Adam, Adagrad, Adadelta, RMSprop, Adamax, Nadam
 losses = ["mse"]
 batch_sizes = [32]

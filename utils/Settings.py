@@ -13,7 +13,7 @@ SPF_3D_NETWORK = "3D"
 SPF_SCALING = "std"      # minmax, std, loge
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results5_final/"
+SPF_PATH_SAVE_BASE = "history/results6_final/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -66,7 +66,7 @@ optimizers = ['SGD']  ## SGD, Adam, Adagrad, Adadelta, RMSprop, Adamax, Nadam
 losses = ["mse"]
 batch_sizes = [32]
 dropouts = [(0.2,)]
-pop_sizes = [50]
+pop_sizes = [100]
 
 ###================= Settings models for paper ============================####
 
@@ -85,7 +85,7 @@ mlnn1hl_final = {
 mlp_final = {
 	"hidden_sizes": hidden_sizes_traditional,
 	"activations": SPF_ACTIVATIONS,
-	"learning_rate": learning_rates,
+	"learning_rate": [0.001],
 	"epoch": epochs,
 	"batch_size": batch_sizes,
 	"optimizer": ['sgd'],

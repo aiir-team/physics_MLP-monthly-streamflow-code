@@ -1,0 +1,51 @@
+1. About models
+- We have 14 models in comparison. If you guys want to push all 14 models in the paper I agree.
+- Our study is very comprehensive when compare between traditional methods and hybrid methods.
+- Also in hybrid methods, we compare different types of hybrid algorithms.
+
+
+2. About RNN model
+- But take a look at RNN model, It is better than most of our physics-hybrid models in terms of error like
+R2, R, MAPE, MRE, Confidence.
+- Like I said before. RNN model is one of the best model for time-series forecasting problems.
+So that is why RNN shows better results.
+- But our models are better than RNN in terms of stability. We can debate about that to make our study more reasonable.
+- Or if you want to remove RNN model, I agree, your call.
+
+
+3. About Confidence metric
+- I think the Confidence is the most effective metric to determine the model is good or bad.
+- If we take a look at the MEAN value of the Confidence metric, then we see our models are clearly better than traditional MLP.
+- The value range of Confidence metric like below:
+
+    > 0.85          Excellent
+    0.76-0.85       Very good
+    0.66-0.75       Good
+    0.61-0.65       Satisfactory
+    0.51-0.60       Poor
+    0.41-0.50       Bad
+    ≤ 0.40          Very bad
+
+- Document about Confidence metric here:
+https://www.researchgate.net/publication/319699360_Reference_evapotranspiration_for_Londrina_Parana_Brazil_performance_of_different_estimation_methods
+Reference evapotranspiration for Londrina, Paraná, Brazil: performance of different estimation methods
+
+
+4. About MRE metric.
+- MRE is Mean Relative Error.
+- Assumption that:
+	+ you have an example: (y_true, y_predict) --> you can calculate RE: Relative Error
+    + Now you have n-examples of (y_true, y_predict) --> you can calculate RE of n-examples then take the MEAN --> you have MRE
+	+ Because in your testing set, you have n-examples --> you have MRE value (or list of RE value)
+- Another assumption that:
+	+ you run your program with the same parameters in 10 different times --> you have 10 MRE values.
+	+ Now you can calculate the Mean, the STD, and Variance of 10 run-times for MRE or any metrics you like.
+	+ That is how we have the statistics table about MEAN, STD, VARIANCE.
+
+
+5. About stability images.
+- As you can see almost all of the stability images have the same (similarity) trends. Why is that? Even they are different metric calculations?
+- Simple question. Because all of models here perform >= very good (Confidence > 0.76). So their error metrics do not fluctuate much.
+- The one is good at 1 metric then it will good in almost other metrics.
+
+

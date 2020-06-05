@@ -12,7 +12,7 @@ from statsmodels.graphics import tsaplots
 from pandas import read_csv
 
 ## 2 groups: 1 with value, 1 with log value
-filename1 = ["full_dataset2.csv"]
+filename1 = ["full_dataset.csv"]
 x_cords = ["Timestamp (daily)"]
 y_cords = ["MM"]
 titles = ["Daily Rainfall"]
@@ -31,7 +31,7 @@ for it in range(len(filename1)):
     plt.show()
 
 
-    tsaplots.plot_acf(df, lags=72)
+    tsaplots.plot_acf(df["value"].values, lags=72)
     plt.savefig(path_save + "acf_" + filename1[it] + ".pdf", bbox_inches='tight')
     plt.show()
 

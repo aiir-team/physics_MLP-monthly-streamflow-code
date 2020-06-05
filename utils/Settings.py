@@ -13,7 +13,7 @@ SPF_3D_NETWORK = "3D"
 SPF_SCALING = "std"      # minmax, std, loge
 SPF_FEATURE_SIZE = 1
 SPF_TRAIN_SPLIT = 0.75
-SPF_PATH_SAVE_BASE = "history/results7_final/"
+SPF_PATH_SAVE_BASE = "history/results8_final/"
 SPF_DRAW = True
 SPF_LOG = 0  # 0: nothing, 1 : full detail, 2: short version
 
@@ -30,10 +30,18 @@ SPF_LOAD_DATA_FROM = "dataset/test/"
 SPF_DATA_FILENAME = ["full_dataset"]
 SPF_DATA_COLS = [[1]]
 SPF_DATA_WINDOWS = [
-	[  ## full_dataset
-		[1, 4, 5, 6, 7, 8, 11, 12],  # c = 91
+	[
+		[1],
+		[1, 11, 12, 13],
+		[1, 11, 12, 13, 23, 24, 25],
+		[1, 11, 12, 13, 23, 24, 25, 35, 36, 37]
 	]
 ]
+# SPF_DATA_WINDOWS = [
+# 	[  ## full_dataset
+# 		[1, 4, 5, 6, 7, 8, 11, 12],  # c = 91
+# 	]
+# ]
 # SPF_DATA_WINDOWS = [
 # 	[   ## full_dataset
 # 		[1, 5, 6, 7, 11, 12],                       # c = 90

@@ -10,7 +10,7 @@
 import pandas as pd
 import numpy as np
 import logging
-logging.basicConfig(filename='kurtosis.log', level=logging.DEBUG)
+logging.basicConfig(filename='acf/kurtosis.log', level=logging.DEBUG)
 
 filenames = ["full_dataset"]
 

@@ -8,6 +8,8 @@
 # -------------------------------------------------------------------------------------------------------%
 
 from numpy import reshape, array, log, exp, sign, abs, power
+from scipy.stats import boxcox
+from scipy.special import inv_boxcox
 
 
 class CheckDataset:
@@ -61,27 +63,43 @@ class TimeSeries:
             self.data_new = (self.data_original - self.data_min) / (self.data_max - self.data_min)
         elif scale_type == "loge":
             self.data_new = log(self.data_original)
+
         elif scale_type == "kurtosis":
             self.data_new = sign(self.data_original - self.data_mean) * power(abs(self.data_original - self.data_mean), 1.0/3)
+        elif scale_type == "kurtosis_std":
+            self.data_kurtosis = sign(self.data_original - self.data_mean) * power(abs(self.data_original - self.data_mean), 1.0 / 3)
+            self.data_mean_kur, self.data_std_kur = self.data_original[:self.train_split].mean(axis=0), self.data_original[:self.train_split].std(axis=0)
+            self.data_new = (self.data_kurtosis - self.data_mean_kur) / self.data_std_kur
+
+        elif scale_type == "boxcox":
+            self.data_new, self.lamda_boxcox = boxcox(self.data_original.flatten())
+        elif scale_type == "boxcox_std":
+            self.data_boxcox, self.lamda_boxcox = boxcox(self.data_original.flatten())
+            self.data_boxcox = self.data_boxcox.reshape(-1, 1)
+            self.data_mean, self.data_std = self.data_boxcox[:self.train_split].mean(axis=0), self.data_boxcox[:self.train_split].std(axis=0)
+            self.data_new = (self.data_boxcox - self.data_mean) / self.data_std
         return self.data_new
 
+
     def _inverse_scaling__(self, data=None, scale_type="std"):
-        """
-        :param data:
-        :type data:
-        :param scale_type:
-        :type scale_type:
-        :return:
-        :rtype:
-        """
         if scale_type == "std":
             return self.data_std * data + self.data_mean
         elif scale_type == "minmax":
             return data * (self.data_max - self.data_min) + self.data_min
         elif scale_type == "loge":
             return exp(data)
+
         elif scale_type == "kurtosis":
             return power(data, 3) + self.data_mean
+        elif scale_type == "kurtosis_std":
+            temp = self.data_std_kur * data + self.data_mean_kur
+            return power(temp, 3) + self.data_mean
+
+        elif scale_type == "boxcox":
+            return inv_boxcox(data, self.lamda_boxcox)
+        elif scale_type == "boxcox_std":
+            boxcox_invert = self.data_std * data + self.data_mean
+            return inv_boxcox(boxcox_invert, self.lamda_boxcox)
 
     def _univariate_data__(self, dataset, history_column=None, start_index=0, end_index=None, pre_type="2D"):
         """

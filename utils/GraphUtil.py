@@ -6,6 +6,7 @@
 #       Homepage:   https://www.researchgate.net/profile/Thieu_Nguyen6                                  %
 #       Github:     https://github.com/thieunguyen5991                                                  %
 # -------------------------------------------------------------------------------------------------------%
+
 from numpy import array, arange
 from matplotlib import pyplot as plt
 import seaborn as sns
@@ -35,23 +36,29 @@ def _draw_predict_with_error__(data=None, error=None, filename=None, pathsave=No
     list_data[1].rename("Predicted streamflow", inplace=True)
 
     # Draw Plot
-    plt.rcParams['figure.figsize'] = 10, 3.5
+    plt.rcParams['figure.figsize'] = 10, 6.5
 
     # sns.set(color_codes=True)
     my_fig = plt.figure(constrained_layout=True)
-    gs = my_fig.add_gridspec(nrows=1, ncols=5)
+    gs = my_fig.add_gridspec(nrows=2, ncols=5)
 
-    ax1 = my_fig.add_subplot(gs[0, :3])
+    re_data = 100 * (data[0] - data[1]) / data[0]
+    ax3 = my_fig.add_subplot(gs[0, :])
+    sns.lineplot(data=re_data, ax=ax3)
+    ax3.set(ylabel='RE(%)')
+
+    ax1 = my_fig.add_subplot(gs[1, :3])
     sns.lineplot(data=list_data, ax=ax1)
     ax1.set(xlabel='Months', ylabel=r'Streamflow ($m^3/s$)', title='Performance Prediction: C=' + str(round(error[1], 2)))
     # ax1.set(xlabel='Months', ylabel=r'Streamflow ($m^3/sec$)')
 
-    ax2 = my_fig.add_subplot(gs[0:, 3:])
+    ax2 = my_fig.add_subplot(gs[1:, 3:])
     sns.regplot(x="y_true", y="y_pred", data=df, ax=ax2)
     ax2.set(xlabel=r'Observed ($m^3/s$)', ylabel=r'Predicted ($m^3/s$)', title='Linear Relationship: R=' + str(round(error[0], 3)))
     # ax2.set(xlabel=r'Observed ($m^3/s$)', ylabel=r'Predicted ($m^3/s$)')
     ax2.legend(['Fit'])
 
+    # plt.tight_layout()
     plt.savefig(pathsave + filename + ".png", bbox_inches='tight')
     # plt.show()
     plt.close()

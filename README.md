@@ -1,5 +1,11 @@
 # State-of-the-art physics-based metaheuristics - multilayer perceptron for monthly streamflow time-series forecasting (Malaysia Team)
 
+# Links:
+1. Code
+    https://github.com/ai-freelancer/physics_MLP_monthly_streamflow
+2. Paper:
+    https://github.com/ai-freelancer/list_papers/physics_MLP_monthly_streamflow
+    
 ## Models
 ### Traditional 
 1. MLP (Streamflow forecasting using artificial neural network and support vector machine models)

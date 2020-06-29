@@ -1,4 +1,4 @@
-# Physics-Inspired Optimization Multi-Layer Perceptron for Rainfall Time Series Forecasting
+# State-of-the-art physics-based metaheuristics - multilayer perceptron for monthly streamflow time-series forecasting (Malaysia Team)
 
 ## Models
 ### Traditional 
@@ -30,5 +30,5 @@
  
  
 # Results in paper
-- Convergence errors of models in history/results/csv/error_best_full_dataset.csv
-- Predicted results of models in history/results/csv/predict_best_full_dataset.csv
+- Convergence errors of models in docs/results_of_paper/final_results_from_Thieu.xlsx
+- Stability figures in the paper in docs/results_of_paper/images/...

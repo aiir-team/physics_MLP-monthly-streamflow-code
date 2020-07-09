@@ -7,15 +7,15 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-from numpy import ndarray, array, max, round, sqrt, abs, where, mean, dot, divide, arctan, sum, any
-from sklearn.metrics import explained_variance_score, max_error, mean_absolute_error, mean_squared_error
-from sklearn.metrics import mean_squared_log_error, median_absolute_error, r2_score
+from numpy import ndarray, array, max, round, sqrt, abs, where, mean, dot, divide, arctan, sum, any, median, isfinite, isnan
+from sklearn.metrics import explained_variance_score, mean_absolute_error, mean_squared_error, mean_squared_log_error, r2_score
 
 
 class RegressionMetrics:
     """
         https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics
     """
+
     def __init__(self, y_true, y_pred, multi_output="raw_values", number_rounding=3):
         """
         :param y_true:
@@ -25,22 +25,45 @@ class RegressionMetrics:
         """
         self.onedim = False
         if type(y_true) is ndarray and type(y_pred) is ndarray:
-            self.y_true = y_true
-            self.y_pred = y_pred
+            y_true = y_true.astype('float64')
+            y_pred = y_pred.astype('float64')  # x = x[~np.isnan(x)] can't remove if array is dtype object, only work with dtype float
+
             if y_true.ndim == 1 and y_pred.ndim == 1:
+                ## Remove all Nan in y_pred
+                y_true = y_true[~isnan(y_pred)]
+                y_pred = y_pred[~isnan(y_pred)]
+
+                ## Remove all Inf in y_pred
+                y_true = y_true[isfinite(y_pred)]
+                y_pred = y_pred[isfinite(y_pred)]
+
+                # Do everything else
+                self.y_true = y_true
+                self.y_pred = y_pred
                 self.onedim = True
-                self.y_true_clear = self.y_true[self.y_true != 0]
-                self.y_pred_clear = self.y_pred[self.y_true != 0]
+                self.y_true_clear = self.y_true[self.y_pred != 0]
+                self.y_pred_clear = self.y_pred[self.y_pred != 0]
             else:
-                self.y_true_clear = self.y_true[~any(self.y_true == 0, axis=1)]
-                self.y_pred_clear = self.y_pred[~any(self.y_true == 0, axis=1)]
+                ## Remove all row with Nan in y_pred
+                y_true = y_true[~isnan(y_pred).any(axis=1)]
+                y_pred = y_pred[~isnan(y_pred).any(axis=1)]
+
+                ## Remove all row with Inf in y_pred
+                y_true = y_true[isfinite(y_pred).any(axis=1)]
+                y_pred = y_pred[isfinite(y_pred).any(axis=1)]
+
+                # Do everything else
+                self.y_true = y_true
+                self.y_pred = y_pred
+                self.y_true_clear = self.y_true[~any(self.y_pred == 0, axis=1)]
+                self.y_pred_clear = self.y_pred[~any(self.y_pred == 0, axis=1)]
         else:
             print("=====Failed on y_true/y_pred ndarray=======")
             exit(0)
         self.multi_output = multi_output
         self.number_rounding = number_rounding
 
-    def evs_function(self):         # explained_variance_score
+    def evs_function(self):  # explained_variance_score
         """
             EV < 1. Best possible score is 1.0, lower values are worse.
         """
@@ -49,22 +72,29 @@ class RegressionMetrics:
         else:
             return round(explained_variance_score(self.y_true, self.y_pred, multioutput=self.multi_output), self.number_rounding)
 
-    def me_function(self):            # max_error
+    def me_function(self):  # max_error
         """
             Smaller is better
         """
         if self.onedim:
-            return round(max_error(self.y_true, self.y_pred), self.number_rounding)
+            return round(max(abs(self.y_true - self.y_pred)), self.number_rounding)
         else:
-            if self.multi_output == "raw_values":
-                absolute = abs(self.y_true - self.y_pred)
-                residual = max(absolute, axis=0)
+            temp = max(abs(self.y_true - self.y_pred), axis=0)
+            if self.multi_output is None:
+                return round(mean(temp), self.number_rounding)
+            elif isinstance(self.multi_output, (tuple, list, set)):
+                weights = array(self.multi_output)
+                if self.y_true.ndim != len(weights):
+                    print("==========Failed because different dimension==============")
+                    exit(0)
+                return round(dot(temp, weights), self.number_rounding)
+            elif self.multi_output == "raw_values":
+                return round(temp, self.number_rounding)
             else:
-                absolute = abs(self.y_true - self.y_pred)
-                residual = max(absolute)
-            return residual
+                print("=========Not supported===================")
+                exit(0)
 
-    def mae_function(self):     # mean_absolute_error functions
+    def mae_function(self):  # mean_absolute_error functions
         """
             Smaller is better
         """
@@ -91,7 +121,7 @@ class RegressionMetrics:
         else:
             return round(sqrt(mean_squared_error(self.y_true, self.y_pred, multioutput=self.multi_output)), self.number_rounding)
 
-    def msle_function(self):    # mean_squared_log_error function
+    def msle_function(self):  # mean_squared_log_error function
         """
             Smaller is better
         """
@@ -102,14 +132,27 @@ class RegressionMetrics:
         else:
             return round(mean_squared_log_error(y_true, y_pred, multioutput=self.multi_output), self.number_rounding)
 
-    def medae_function(self):     # median_absolute_error
+    def medae_function(self):  # median_absolute_error
         """
             Smaller is better
         """
         if self.onedim:
-            return round(median_absolute_error(self.y_true, self.y_pred), self.number_rounding)
+            return round(median(abs(self.y_true - self.y_pred)), self.number_rounding)
         else:
-            return round(median_absolute_error(self.y_true, self.y_pred, multioutput=self.multi_output), self.number_rounding)
+            temp = median(abs(self.y_true - self.y_pred), axis=0)
+            if self.multi_output is None:
+                return round(mean(temp), self.number_rounding)
+            elif isinstance(self.multi_output, (tuple, list, set)):
+                weights = array(self.multi_output)
+                if self.y_true.ndim != len(weights):
+                    print("==========Failed because different dimension==============")
+                    exit(0)
+                return round(dot(temp, weights), self.number_rounding)
+            elif self.multi_output == "raw_values":
+                return round(temp, self.number_rounding)
+            else:
+                print("=========Not supported===================")
+                exit(0)
 
     def r2_function(self):  # r2_score
         """
@@ -121,7 +164,7 @@ class RegressionMetrics:
         else:
             return round(r2_score(self.y_true, self.y_pred, multioutput=self.multi_output), self.number_rounding)
 
-    def mre_function(self):     # Mean relative error
+    def mre_function(self):  # Mean relative error
         """
             Good if mre < 40%. Smaller is better
         """
@@ -165,7 +208,7 @@ class RegressionMetrics:
                 print("=========Not supported===================")
                 exit(0)
 
-    def smape_function(self):   # symmetric_mean_absolute_percentage_error
+    def smape_function(self):  # symmetric_mean_absolute_percentage_error
         if self.onedim:
             return round(mean(2 * abs(self.y_pred_clear - self.y_true_clear) / (abs(self.y_true_clear) + abs(self.y_pred_clear))) * 100, self.number_rounding)
         else:
@@ -184,7 +227,7 @@ class RegressionMetrics:
                 print("=========Not supported===================")
                 exit(0)
 
-    def maape_function(self):   # Mean Arctangent Absolute Percentage Error (output: radian values)
+    def maape_function(self):  # Mean Arctangent Absolute Percentage Error (output: radian values)
         """
             https://support.numxl.com/hc/en-us/articles/115001223463-MAAPE-Mean-Arctangent-Absolute-Percentage-Error
         """
@@ -206,7 +249,7 @@ class RegressionMetrics:
                 print("=========Not supported===================")
                 exit(0)
 
-    def mase_function(self, m=1):       # Mean absolute scaled error
+    def mase_function(self, m=1):  # Mean absolute scaled error
         """
             https://en.wikipedia.org/wiki/Mean_absolute_scaled_error
             m = 1 for non-seasonal data, m > 1 for seasonal data
@@ -287,7 +330,7 @@ class RegressionMetrics:
         """
         if self.onedim:
             m1, m2 = mean(self.y_true), mean(self.y_pred)
-            temp = sum((abs(self.y_true - m1) * abs(self.y_pred - m2))) / (sqrt(sum((self.y_true - m1)**2)) * sqrt(sum((self.y_pred - m2)**2)))
+            temp = sum((abs(self.y_true - m1) * abs(self.y_pred - m2))) / (sqrt(sum((self.y_true - m1) ** 2)) * sqrt(sum((self.y_pred - m2) ** 2)))
             return round(temp, self.number_rounding)
         else:
             m1, m2 = mean(self.y_true, axis=0), mean(self.y_pred, axis=0)
@@ -324,19 +367,18 @@ class RegressionMetrics:
         r = self.r_function()
         d = self.wi_function()
         if self.multi_output is None:
-            return round(mean(r*d), self.number_rounding)
+            return round(mean(r * d), self.number_rounding)
         elif isinstance(self.multi_output, (tuple, list, set)):
             weights = array(self.multi_output)
             if self.y_true.ndim != len(weights):
                 print("==========Failed because different dimension==============")
                 exit(0)
-            return round(dot(r*d, weights), self.number_rounding)
+            return round(dot(r * d, weights), self.number_rounding)
         elif self.multi_output == "raw_values":
-            return round(r*d, self.number_rounding)
+            return round(r * d, self.number_rounding)
         else:
             print("=========Not supported===================")
             exit(0)
-
 
     def _fit__(self):
         evs = self.evs_function()
@@ -356,5 +398,5 @@ class RegressionMetrics:
         wi = self.wi_function()
         r = self.r_function()
         c = self.confidence_function()
-        return {"evs":evs, "me":me, "mae":mae, "mse":mse, "rmse":rmse, "msle":msle, "medae":medae,
-                "r2":r2, "mre":mre, "mape":mape, "smape":smape, "maape":maape, "mase":mase, "nse": nse, "wi": wi, "r": r, "c": c}
+        return {"evs": evs, "me": me, "mae": mae, "mse": mse, "rmse": rmse, "msle": msle, "medae": medae,
+                "r2": r2, "mre": mre, "mape": mape, "smape": smape, "maape": maape, "mase": mase, "nse": nse, "wi": wi, "r": r, "c": c}
